@@ -1,0 +1,370 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generators &#8212; Webware for Python 3 3.0.2 documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="ParseEventHandler" href="parseeventhandler.html" />
+    <link rel="prev" title="Context" href="context.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-PSP.Generators">
+<span id="generators"></span><h1>Generators<a class="headerlink" href="#module-PSP.Generators" title="Permalink to this headline">¶</a></h1>
+<p>Generate Python code from PSP templates.</p>
+<p>This module holds the classes that generate the Python code resulting
+from the PSP template file. As the parser encounters PSP elements,
+it creates a new Generator object for that type of element.
+Each of these elements is put into a list maintained by the
+ParseEventHandler object. When it comes time to output the source code,
+each generator is called in turn to create its source.</p>
+<p>Copyright (c) by Jay Love, 2000 (<a class="reference external" href="mailto:jsliv&#37;&#52;&#48;jslove&#46;org">mailto:jsliv<span>&#64;</span>jslove<span>&#46;</span>org</a>)</p>
+<p>Permission to use, copy, modify, and distribute this software and its
+documentation for any purpose and without fee or royalty is hereby granted,
+provided that the above copyright notice appear in all copies and that
+both that copyright notice and this permission notice appear in
+supporting documentation or portions thereof, including modifications,
+that you make.</p>
+<p>This software is based in part on work done by the Jakarta group.</p>
+<dl class="py class">
+<dt id="PSP.Generators.CharDataGenerator">
+<em class="property">class </em><code class="sig-prename descclassname">PSP.Generators.</code><code class="sig-name descname">CharDataGenerator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">chars</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.Generators.CharDataGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#PSP.Generators.GenericGenerator" title="PSP.Generators.GenericGenerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">PSP.Generators.GenericGenerator</span></code></a></p>
+<p>This class handles standard character output, mostly HTML.</p>
+<p>It just dumps it out. Need to handle all the escaping of characters.
+It’s just skipped for now.</p>
+<dl class="py method">
+<dt id="PSP.Generators.CharDataGenerator.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">chars</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.Generators.CharDataGenerator.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.Generators.CharDataGenerator.generate">
+<code class="sig-name descname">generate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">writer</span></em>, <em class="sig-param"><span class="n">phase</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.Generators.CharDataGenerator.generate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.Generators.CharDataGenerator.generateChunk">
+<code class="sig-name descname">generateChunk</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">writer</span></em>, <em class="sig-param"><span class="n">start</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">stop</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.Generators.CharDataGenerator.generateChunk" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.Generators.CharDataGenerator.mergeData">
+<code class="sig-name descname">mergeData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cdGen</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.Generators.CharDataGenerator.mergeData" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="PSP.Generators.EndBlockGenerator">
+<em class="property">class </em><code class="sig-prename descclassname">PSP.Generators.</code><code class="sig-name descname">EndBlockGenerator</code><a class="headerlink" href="#PSP.Generators.EndBlockGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#PSP.Generators.GenericGenerator" title="PSP.Generators.GenericGenerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">PSP.Generators.GenericGenerator</span></code></a></p>
+<dl class="py method">
+<dt id="PSP.Generators.EndBlockGenerator.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PSP.Generators.EndBlockGenerator.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.Generators.EndBlockGenerator.generate">
+<code class="sig-name descname">generate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">writer</span></em>, <em class="sig-param"><span class="n">phase</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.Generators.EndBlockGenerator.generate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="PSP.Generators.ExpressionGenerator">
+<em class="property">class </em><code class="sig-prename descclassname">PSP.Generators.</code><code class="sig-name descname">ExpressionGenerator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">chars</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.Generators.ExpressionGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#PSP.Generators.GenericGenerator" title="PSP.Generators.GenericGenerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">PSP.Generators.GenericGenerator</span></code></a></p>
+<p>This class handles expression blocks.</p>
+<p>It simply outputs the (hopefully) python expression within the block
+wrapped with a _formatter() call.</p>
+<dl class="py method">
+<dt id="PSP.Generators.ExpressionGenerator.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">chars</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.Generators.ExpressionGenerator.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.Generators.ExpressionGenerator.generate">
+<code class="sig-name descname">generate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">writer</span></em>, <em class="sig-param"><span class="n">phase</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.Generators.ExpressionGenerator.generate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="PSP.Generators.GenericGenerator">
+<em class="property">class </em><code class="sig-prename descclassname">PSP.Generators.</code><code class="sig-name descname">GenericGenerator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ctxt</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.Generators.GenericGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base class for all the generators</p>
+<dl class="py method">
+<dt id="PSP.Generators.GenericGenerator.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ctxt</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.Generators.GenericGenerator.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="PSP.Generators.IncludeGenerator">
+<em class="property">class </em><code class="sig-prename descclassname">PSP.Generators.</code><code class="sig-name descname">IncludeGenerator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">attrs</span></em>, <em class="sig-param"><span class="n">param</span></em>, <em class="sig-param"><span class="n">ctxt</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.Generators.IncludeGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#PSP.Generators.GenericGenerator" title="PSP.Generators.GenericGenerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">PSP.Generators.GenericGenerator</span></code></a></p>
+<p>Handle psp:include directives.</p>
+<p>This is a new version of this directive that actually
+forwards the request to the specified page.</p>
+<dl class="py method">
+<dt id="PSP.Generators.IncludeGenerator.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">attrs</span></em>, <em class="sig-param"><span class="n">param</span></em>, <em class="sig-param"><span class="n">ctxt</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.Generators.IncludeGenerator.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.Generators.IncludeGenerator.generate">
+<code class="sig-name descname">generate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">writer</span></em>, <em class="sig-param"><span class="n">phase</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.Generators.IncludeGenerator.generate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Just insert theFunction.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="PSP.Generators.InsertGenerator">
+<em class="property">class </em><code class="sig-prename descclassname">PSP.Generators.</code><code class="sig-name descname">InsertGenerator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">attrs</span></em>, <em class="sig-param"><span class="n">param</span></em>, <em class="sig-param"><span class="n">ctxt</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.Generators.InsertGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#PSP.Generators.GenericGenerator" title="PSP.Generators.GenericGenerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">PSP.Generators.GenericGenerator</span></code></a></p>
+<p>Include files designated by the psp:insert syntax.</p>
+<p>If the attribute ‘static’ is set to True or 1, we include the file now,
+at compile time. Otherwise, we use a function added to every PSP page
+named <code class="docutils literal notranslate"><span class="pre">__includeFile</span></code>, which reads the file at run time.</p>
+<dl class="py method">
+<dt id="PSP.Generators.InsertGenerator.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">attrs</span></em>, <em class="sig-param"><span class="n">param</span></em>, <em class="sig-param"><span class="n">ctxt</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.Generators.InsertGenerator.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.Generators.InsertGenerator.generate">
+<code class="sig-name descname">generate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">writer</span></em>, <em class="sig-param"><span class="n">phase</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.Generators.InsertGenerator.generate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="PSP.Generators.MethodEndGenerator">
+<em class="property">class </em><code class="sig-prename descclassname">PSP.Generators.</code><code class="sig-name descname">MethodEndGenerator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">chars</span></em>, <em class="sig-param"><span class="n">attrs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.Generators.MethodEndGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#PSP.Generators.GenericGenerator" title="PSP.Generators.GenericGenerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">PSP.Generators.GenericGenerator</span></code></a></p>
+<p>Part of class method generation.</p>
+<p>After MethodGenerator, MethodEndGenerator actually generates
+the code for the method body.</p>
+<dl class="py method">
+<dt id="PSP.Generators.MethodEndGenerator.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">chars</span></em>, <em class="sig-param"><span class="n">attrs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.Generators.MethodEndGenerator.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.Generators.MethodEndGenerator.generate">
+<code class="sig-name descname">generate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">writer</span></em>, <em class="sig-param"><span class="n">phase</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.Generators.MethodEndGenerator.generate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="PSP.Generators.MethodGenerator">
+<em class="property">class </em><code class="sig-prename descclassname">PSP.Generators.</code><code class="sig-name descname">MethodGenerator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">chars</span></em>, <em class="sig-param"><span class="n">attrs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.Generators.MethodGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#PSP.Generators.GenericGenerator" title="PSP.Generators.GenericGenerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">PSP.Generators.GenericGenerator</span></code></a></p>
+<p>Generate class methods defined in the PSP page.</p>
+<p>There are two parts to method generation.
+This class handles getting the method name and parameters set up.</p>
+<dl class="py method">
+<dt id="PSP.Generators.MethodGenerator.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">chars</span></em>, <em class="sig-param"><span class="n">attrs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.Generators.MethodGenerator.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.Generators.MethodGenerator.generate">
+<code class="sig-name descname">generate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">writer</span></em>, <em class="sig-param"><span class="n">phase</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.Generators.MethodGenerator.generate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="PSP.Generators.ScriptClassGenerator">
+<em class="property">class </em><code class="sig-prename descclassname">PSP.Generators.</code><code class="sig-name descname">ScriptClassGenerator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">chars</span></em>, <em class="sig-param"><span class="n">attrs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.Generators.ScriptClassGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#PSP.Generators.GenericGenerator" title="PSP.Generators.GenericGenerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">PSP.Generators.GenericGenerator</span></code></a></p>
+<p>Add Python code at the class level.</p>
+<dl class="py method">
+<dt id="PSP.Generators.ScriptClassGenerator.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">chars</span></em>, <em class="sig-param"><span class="n">attrs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.Generators.ScriptClassGenerator.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.Generators.ScriptClassGenerator.generate">
+<code class="sig-name descname">generate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">writer</span></em>, <em class="sig-param"><span class="n">phase</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.Generators.ScriptClassGenerator.generate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="PSP.Generators.ScriptFileGenerator">
+<em class="property">class </em><code class="sig-prename descclassname">PSP.Generators.</code><code class="sig-name descname">ScriptFileGenerator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">chars</span></em>, <em class="sig-param"><span class="n">attrs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.Generators.ScriptFileGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#PSP.Generators.GenericGenerator" title="PSP.Generators.GenericGenerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">PSP.Generators.GenericGenerator</span></code></a></p>
+<p>Add Python code at the file/module level.</p>
+<dl class="py method">
+<dt id="PSP.Generators.ScriptFileGenerator.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">chars</span></em>, <em class="sig-param"><span class="n">attrs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.Generators.ScriptFileGenerator.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.Generators.ScriptFileGenerator.generate">
+<code class="sig-name descname">generate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">writer</span></em>, <em class="sig-param"><span class="n">phase</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.Generators.ScriptFileGenerator.generate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="PSP.Generators.ScriptGenerator">
+<em class="property">class </em><code class="sig-prename descclassname">PSP.Generators.</code><code class="sig-name descname">ScriptGenerator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">chars</span></em>, <em class="sig-param"><span class="n">attrs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.Generators.ScriptGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#PSP.Generators.GenericGenerator" title="PSP.Generators.GenericGenerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">PSP.Generators.GenericGenerator</span></code></a></p>
+<p>Generate scripts.</p>
+<dl class="py method">
+<dt id="PSP.Generators.ScriptGenerator.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">chars</span></em>, <em class="sig-param"><span class="n">attrs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.Generators.ScriptGenerator.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.Generators.ScriptGenerator.generate">
+<code class="sig-name descname">generate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">writer</span></em>, <em class="sig-param"><span class="n">phase</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.Generators.ScriptGenerator.generate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Webware for Python 3</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changes.html">List of Changes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migrate.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../copyright.html">Copyright and License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Beginner Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appdev.html">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../config.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deploy.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">Plug-ins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../style.html">Style Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../psp.html">PSP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../userkit.html">UserKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskkit.html">TaskKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../webutils.html">WebUtils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../miscutils.html">MiscUtils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../core/index.html">Core Classes</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">PSP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../userkit/index.html">UserKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../taskkit/index.html">TaskKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../webutils/index.html">WebUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscutils/index.html">MiscUtils</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">API Reference</a><ul>
+  <li><a href="index.html">PSP</a><ul>
+      <li>Previous: <a href="context.html" title="previous chapter">Context</a></li>
+      <li>Next: <a href="parseeventhandler.html" title="next chapter">ParseEventHandler</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;1999-2021, Christoph Zwerschke et al.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/ref/psp/generators.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

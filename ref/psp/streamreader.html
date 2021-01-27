@@ -1,0 +1,308 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StreamReader &#8212; Webware for Python 3 3.0.2 documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="UserKit" href="../userkit/index.html" />
+    <link rel="prev" title="ServletWriter" href="servletwriter.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-PSP.StreamReader">
+<span id="streamreader"></span><h1>StreamReader<a class="headerlink" href="#module-PSP.StreamReader" title="Permalink to this headline">¶</a></h1>
+<p>This module co-ordinates the reading of the source file.</p>
+<p>It maintains the current position of the parser in the source file.</p>
+<p>Copyright (c) by Jay Love, 2000 (<a class="reference external" href="mailto:jsliv&#37;&#52;&#48;jslove&#46;org">mailto:jsliv<span>&#64;</span>jslove<span>&#46;</span>org</a>)</p>
+<p>Permission to use, copy, modify, and distribute this software and its
+documentation for any purpose and without fee or royalty is hereby granted,
+provided that the above copyright notice appear in all copies and that
+both that copyright notice and this permission notice appear in
+supporting documentation or portions thereof, including modifications,
+that you make.</p>
+<p>This software is based in part on work done by the Jakarta group.</p>
+<dl class="py class">
+<dt id="PSP.StreamReader.Mark">
+<em class="property">class </em><code class="sig-prename descclassname">PSP.StreamReader.</code><code class="sig-name descname">Mark</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">reader</span></em>, <em class="sig-param"><span class="n">fileId</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">stream</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">inBaseDir</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">encoding</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.StreamReader.Mark" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class marks a point in an input stream.</p>
+<dl class="py method">
+<dt id="PSP.StreamReader.Mark.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">reader</span></em>, <em class="sig-param"><span class="n">fileId</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">stream</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">inBaseDir</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">encoding</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.StreamReader.Mark.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.StreamReader.Mark.getFile">
+<code class="sig-name descname">getFile</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PSP.StreamReader.Mark.getFile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.StreamReader.Mark.popStream">
+<code class="sig-name descname">popStream</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PSP.StreamReader.Mark.popStream" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.StreamReader.Mark.pushStream">
+<code class="sig-name descname">pushStream</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">inFileId</span></em>, <em class="sig-param"><span class="n">inStream</span></em>, <em class="sig-param"><span class="n">inBaseDir</span></em>, <em class="sig-param"><span class="n">inEncoding</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.StreamReader.Mark.pushStream" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="PSP.StreamReader.StreamReader">
+<em class="property">class </em><code class="sig-prename descclassname">PSP.StreamReader.</code><code class="sig-name descname">StreamReader</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">ctxt</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.StreamReader.StreamReader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class handles the PSP source file.</p>
+<p>It provides the characters to the other parts of the system.
+It can move forward and backwards in a file and remember locations.</p>
+<dl class="py method">
+<dt id="PSP.StreamReader.StreamReader.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">ctxt</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.StreamReader.StreamReader.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.StreamReader.StreamReader.advance">
+<code class="sig-name descname">advance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">length</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.StreamReader.StreamReader.advance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Advance length characters</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.StreamReader.StreamReader.getChars">
+<code class="sig-name descname">getChars</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">start</span></em>, <em class="sig-param"><span class="n">stop</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.StreamReader.StreamReader.getChars" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.StreamReader.StreamReader.getFile">
+<code class="sig-name descname">getFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">i</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.StreamReader.StreamReader.getFile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.StreamReader.StreamReader.hasMoreInput">
+<code class="sig-name descname">hasMoreInput</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PSP.StreamReader.StreamReader.hasMoreInput" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.StreamReader.StreamReader.init">
+<code class="sig-name descname">init</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PSP.StreamReader.StreamReader.init" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.StreamReader.StreamReader.isDelimiter">
+<code class="sig-name descname">isDelimiter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PSP.StreamReader.StreamReader.isDelimiter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.StreamReader.StreamReader.isSpace">
+<code class="sig-name descname">isSpace</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PSP.StreamReader.StreamReader.isSpace" title="Permalink to this definition">¶</a></dt>
+<dd><p>No advancing.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.StreamReader.StreamReader.mark">
+<code class="sig-name descname">mark</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PSP.StreamReader.StreamReader.mark" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.StreamReader.StreamReader.matches">
+<code class="sig-name descname">matches</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.StreamReader.StreamReader.matches" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.StreamReader.StreamReader.newSourceFile">
+<code class="sig-name descname">newSourceFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.StreamReader.StreamReader.newSourceFile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.StreamReader.StreamReader.nextChar">
+<code class="sig-name descname">nextChar</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PSP.StreamReader.StreamReader.nextChar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.StreamReader.StreamReader.nextContent">
+<code class="sig-name descname">nextContent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PSP.StreamReader.StreamReader.nextContent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find next &lt; char.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.StreamReader.StreamReader.parseAttributeValue">
+<code class="sig-name descname">parseAttributeValue</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">valueDict</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.StreamReader.StreamReader.parseAttributeValue" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.StreamReader.StreamReader.parseTagAttributes">
+<code class="sig-name descname">parseTagAttributes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PSP.StreamReader.StreamReader.parseTagAttributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse the attributes at the beginning of a tag.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.StreamReader.StreamReader.parseToken">
+<code class="sig-name descname">parseToken</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">quoted</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.StreamReader.StreamReader.parseToken" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.StreamReader.StreamReader.peekChar">
+<code class="sig-name descname">peekChar</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cnt</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.StreamReader.StreamReader.peekChar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.StreamReader.StreamReader.popFile">
+<code class="sig-name descname">popFile</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PSP.StreamReader.StreamReader.popFile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.StreamReader.StreamReader.pushFile">
+<code class="sig-name descname">pushFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filepath</span></em>, <em class="sig-param"><span class="n">encoding</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.StreamReader.StreamReader.pushFile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.StreamReader.StreamReader.registerSourceFile">
+<code class="sig-name descname">registerSourceFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filepath</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.StreamReader.StreamReader.registerSourceFile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.StreamReader.StreamReader.reset">
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mark</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.StreamReader.StreamReader.reset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.StreamReader.StreamReader.skipSpaces">
+<code class="sig-name descname">skipSpaces</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PSP.StreamReader.StreamReader.skipSpaces" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.StreamReader.StreamReader.skipUntil">
+<code class="sig-name descname">skipUntil</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.StreamReader.StreamReader.skipUntil" title="Permalink to this definition">¶</a></dt>
+<dd><p>Greedy search.</p>
+<p>Return the point before the string, but move reader past it.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Webware for Python 3</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changes.html">List of Changes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migrate.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../copyright.html">Copyright and License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Beginner Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appdev.html">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../config.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deploy.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">Plug-ins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../style.html">Style Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../psp.html">PSP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../userkit.html">UserKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskkit.html">TaskKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../webutils.html">WebUtils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../miscutils.html">MiscUtils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../core/index.html">Core Classes</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">PSP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../userkit/index.html">UserKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../taskkit/index.html">TaskKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../webutils/index.html">WebUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscutils/index.html">MiscUtils</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">API Reference</a><ul>
+  <li><a href="index.html">PSP</a><ul>
+      <li>Previous: <a href="servletwriter.html" title="previous chapter">ServletWriter</a></li>
+      <li>Next: <a href="../userkit/index.html" title="next chapter">UserKit</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;1999-2021, Christoph Zwerschke et al.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/ref/psp/streamreader.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

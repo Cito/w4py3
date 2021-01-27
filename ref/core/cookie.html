@@ -1,0 +1,289 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookie &#8212; Webware for Python 3 3.0.2 documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="ExceptionHandler" href="exceptionhandler.html" />
+    <link rel="prev" title="ConfigurableForServerSidePath" href="configurableforserversidepath.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-Cookie">
+<span id="cookie"></span><h1>Cookie<a class="headerlink" href="#module-Cookie" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="Cookie.Cookie">
+<em class="property">class </em><code class="sig-prename descclassname">Cookie.</code><code class="sig-name descname">Cookie</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Cookie.Cookie" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Delicious cookies.</p>
+<p>Cookie is used to create cookies that have additional attributes
+beyond their value.</p>
+<p>Note that web browsers don’t typically send any information with
+the cookie other than its value. Therefore <cite>HTTPRequest.cookie</cite>
+simply returns a value such as an integer or a string.</p>
+<p>When the server sends cookies back to the browser, it can send a cookie
+that simply has a value, or the cookie can be accompanied by various
+attributes (domain, path, max-age, …) as described in <a class="reference external" href="ftp://ftp.isi.edu/in-notes/rfc2109.txt">RFC 2109</a>.
+Therefore, in <cite>HTTPResponse</cite>, <cite>setCookie</cite> can take either an instance of
+the <cite>Cookie</cite> class, as defined in this module, or a value.</p>
+<p>Note that <cite>Cookie</cite> values get pickled (see the <cite>pickle</cite> module), so
+you can set and get cookies that are integers, lists, dictionaries, etc.</p>
+<dl class="py method">
+<dt id="Cookie.Cookie.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Cookie.Cookie.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a cookie.</p>
+<p>Properties other than <cite>name</cite> and <cite>value</cite> are set with methods.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Cookie.Cookie.comment">
+<code class="sig-name descname">comment</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Cookie.Cookie.comment" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="Cookie.Cookie.delete">
+<code class="sig-name descname">delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Cookie.Cookie.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete a cookie.</p>
+<p>When sent, this should delete the cookie from the user’s
+browser, by making it empty, expiring it in the past,
+and setting its max-age to 0. One of these will delete
+the cookie for any browser (which one actually works
+depends on the browser).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Cookie.Cookie.domain">
+<code class="sig-name descname">domain</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Cookie.Cookie.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="Cookie.Cookie.expires">
+<code class="sig-name descname">expires</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Cookie.Cookie.expires" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="Cookie.Cookie.headerValue">
+<code class="sig-name descname">headerValue</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Cookie.Cookie.headerValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return header value.</p>
+<p>Returns a string with the value that should be used
+in the HTTP headers.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Cookie.Cookie.httpOnly">
+<code class="sig-name descname">httpOnly</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Cookie.Cookie.httpOnly" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="Cookie.Cookie.isSecure">
+<code class="sig-name descname">isSecure</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Cookie.Cookie.isSecure" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="Cookie.Cookie.maxAge">
+<code class="sig-name descname">maxAge</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Cookie.Cookie.maxAge" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="Cookie.Cookie.name">
+<code class="sig-name descname">name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Cookie.Cookie.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="Cookie.Cookie.path">
+<code class="sig-name descname">path</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Cookie.Cookie.path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="Cookie.Cookie.sameSite">
+<code class="sig-name descname">sameSite</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Cookie.Cookie.sameSite" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="Cookie.Cookie.setComment">
+<code class="sig-name descname">setComment</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">comment</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Cookie.Cookie.setComment" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="Cookie.Cookie.setDomain">
+<code class="sig-name descname">setDomain</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">domain</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Cookie.Cookie.setDomain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="Cookie.Cookie.setExpires">
+<code class="sig-name descname">setExpires</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">expires</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Cookie.Cookie.setExpires" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="Cookie.Cookie.setHttpOnly">
+<code class="sig-name descname">setHttpOnly</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">httpOnly</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Cookie.Cookie.setHttpOnly" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="Cookie.Cookie.setMaxAge">
+<code class="sig-name descname">setMaxAge</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">maxAge</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Cookie.Cookie.setMaxAge" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="Cookie.Cookie.setPath">
+<code class="sig-name descname">setPath</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Cookie.Cookie.setPath" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="Cookie.Cookie.setSameSite">
+<code class="sig-name descname">setSameSite</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sameSite</span><span class="o">=</span><span class="default_value">'Strict'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Cookie.Cookie.setSameSite" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="Cookie.Cookie.setSecure">
+<code class="sig-name descname">setSecure</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">secure</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Cookie.Cookie.setSecure" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="Cookie.Cookie.setValue">
+<code class="sig-name descname">setValue</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Cookie.Cookie.setValue" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="Cookie.Cookie.setVersion">
+<code class="sig-name descname">setVersion</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">version</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Cookie.Cookie.setVersion" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="Cookie.Cookie.value">
+<code class="sig-name descname">value</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Cookie.Cookie.value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="Cookie.Cookie.version">
+<code class="sig-name descname">version</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Cookie.Cookie.version" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Webware for Python 3</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changes.html">List of Changes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migrate.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../copyright.html">Copyright and License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Beginner Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appdev.html">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../config.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deploy.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">Plug-ins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../style.html">Style Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../psp.html">PSP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../userkit.html">UserKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskkit.html">TaskKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../webutils.html">WebUtils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../miscutils.html">MiscUtils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Core Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../psp/index.html">PSP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../userkit/index.html">UserKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../taskkit/index.html">TaskKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../webutils/index.html">WebUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscutils/index.html">MiscUtils</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">API Reference</a><ul>
+  <li><a href="index.html">Core Classes</a><ul>
+      <li>Previous: <a href="configurableforserversidepath.html" title="previous chapter">ConfigurableForServerSidePath</a></li>
+      <li>Next: <a href="exceptionhandler.html" title="next chapter">ExceptionHandler</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;1999-2021, Christoph Zwerschke et al.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/ref/core/cookie.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

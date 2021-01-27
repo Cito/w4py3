@@ -1,0 +1,279 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SessionFileStore &#8212; Webware for Python 3 3.0.2 documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="SessionMemcachedStore" href="sessionmemcachedstore.html" />
+    <link rel="prev" title="SessionDynamicStore" href="sessiondynamicstore.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-SessionFileStore">
+<span id="sessionfilestore"></span><h1>SessionFileStore<a class="headerlink" href="#module-SessionFileStore" title="Permalink to this headline">¶</a></h1>
+<p>Session store using files.</p>
+<dl class="py class">
+<dt id="SessionFileStore.SessionFileStore">
+<em class="property">class </em><code class="sig-prename descclassname">SessionFileStore.</code><code class="sig-name descname">SessionFileStore</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">app</span></em>, <em class="sig-param"><span class="n">restoreFiles</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#SessionFileStore.SessionFileStore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="sessionstore.html#SessionStore.SessionStore" title="SessionStore.SessionStore"><code class="xref py py-class docutils literal notranslate"><span class="pre">SessionStore.SessionStore</span></code></a></p>
+<p>A session file store.</p>
+<p>Stores the sessions on disk in the Sessions/ directory,
+one file per session.</p>
+<dl class="py method">
+<dt id="SessionFileStore.SessionFileStore.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">app</span></em>, <em class="sig-param"><span class="n">restoreFiles</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#SessionFileStore.SessionFileStore.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize the session file store.</p>
+<p>If restoreFiles is true, and sessions have been saved to file,
+the store will be initialized from these files.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="SessionFileStore.SessionFileStore.application">
+<code class="sig-name descname">application</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#SessionFileStore.SessionFileStore.application" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the application owning the session store.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="SessionFileStore.SessionFileStore.cleanStaleSessions">
+<code class="sig-name descname">cleanStaleSessions</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">_task</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#SessionFileStore.SessionFileStore.cleanStaleSessions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clean stale sessions.</p>
+<p>Called by the Application to tell this store to clean out all
+sessions that have exceeded their lifetime.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="SessionFileStore.SessionFileStore.clear">
+<code class="sig-name descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#SessionFileStore.SessionFileStore.clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clear the session file store, removing all of the session files.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="SessionFileStore.SessionFileStore.decoder">
+<code class="sig-name descname">decoder</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#SessionFileStore.SessionFileStore.decoder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the value deserializer for the store.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="SessionFileStore.SessionFileStore.encoder">
+<code class="sig-name descname">encoder</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#SessionFileStore.SessionFileStore.encoder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the value serializer for the store.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="SessionFileStore.SessionFileStore.filenameForKey">
+<code class="sig-name descname">filenameForKey</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span></em><span class="sig-paren">)</span><a class="headerlink" href="#SessionFileStore.SessionFileStore.filenameForKey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the name of the session file for the given key.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="SessionFileStore.SessionFileStore.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span></em>, <em class="sig-param"><span class="n">default</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#SessionFileStore.SessionFileStore.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return value if key available, else return the default.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="SessionFileStore.SessionFileStore.has_key">
+<code class="sig-name descname">has_key</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span></em><span class="sig-paren">)</span><a class="headerlink" href="#SessionFileStore.SessionFileStore.has_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether the session store has a given key.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="SessionFileStore.SessionFileStore.items">
+<code class="sig-name descname">items</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#SessionFileStore.SessionFileStore.items" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list with the (key, value) pairs for all sessions.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="SessionFileStore.SessionFileStore.iteritems">
+<code class="sig-name descname">iteritems</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#SessionFileStore.SessionFileStore.iteritems" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an iterator over the (key, value) pairs for all sessions.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="SessionFileStore.SessionFileStore.iterkeys">
+<code class="sig-name descname">iterkeys</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#SessionFileStore.SessionFileStore.iterkeys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an iterator over the stored session keys.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="SessionFileStore.SessionFileStore.itervalues">
+<code class="sig-name descname">itervalues</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#SessionFileStore.SessionFileStore.itervalues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an iterator over the stored values of all sessions.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="SessionFileStore.SessionFileStore.keys">
+<code class="sig-name descname">keys</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#SessionFileStore.SessionFileStore.keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list with the keys of all the stored sessions.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="SessionFileStore.SessionFileStore.pop">
+<code class="sig-name descname">pop</code><span class="sig-paren">(</span><em class="sig-param">key</em>, <em class="sig-param">default=&lt;class 'MiscUtils.NoDefault'&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#SessionFileStore.SessionFileStore.pop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return value if key available, else default (also remove key).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="SessionFileStore.SessionFileStore.removeKey">
+<code class="sig-name descname">removeKey</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span></em><span class="sig-paren">)</span><a class="headerlink" href="#SessionFileStore.SessionFileStore.removeKey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove the session file for the given key.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="SessionFileStore.SessionFileStore.setEncoderDecoder">
+<code class="sig-name descname">setEncoderDecoder</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">encoder</span></em>, <em class="sig-param"><span class="n">decoder</span></em><span class="sig-paren">)</span><a class="headerlink" href="#SessionFileStore.SessionFileStore.setEncoderDecoder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the serializer and deserializer for the store.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="SessionFileStore.SessionFileStore.setdefault">
+<code class="sig-name descname">setdefault</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span></em>, <em class="sig-param"><span class="n">default</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#SessionFileStore.SessionFileStore.setdefault" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return value if key available, else default (also setting it).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="SessionFileStore.SessionFileStore.storeAllSessions">
+<code class="sig-name descname">storeAllSessions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#SessionFileStore.SessionFileStore.storeAllSessions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Permanently save all sessions in the store.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="SessionFileStore.SessionFileStore.storeSession">
+<code class="sig-name descname">storeSession</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">session</span></em><span class="sig-paren">)</span><a class="headerlink" href="#SessionFileStore.SessionFileStore.storeSession" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save session, writing it to the session file now.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="SessionFileStore.SessionFileStore.values">
+<code class="sig-name descname">values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#SessionFileStore.SessionFileStore.values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list with the values of all stored sessions.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Webware for Python 3</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changes.html">List of Changes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migrate.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../copyright.html">Copyright and License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Beginner Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appdev.html">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../config.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deploy.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">Plug-ins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../style.html">Style Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../psp.html">PSP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../userkit.html">UserKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskkit.html">TaskKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../webutils.html">WebUtils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../miscutils.html">MiscUtils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Core Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../psp/index.html">PSP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../userkit/index.html">UserKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../taskkit/index.html">TaskKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../webutils/index.html">WebUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscutils/index.html">MiscUtils</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">API Reference</a><ul>
+  <li><a href="index.html">Core Classes</a><ul>
+      <li>Previous: <a href="sessiondynamicstore.html" title="previous chapter">SessionDynamicStore</a></li>
+      <li>Next: <a href="sessionmemcachedstore.html" title="next chapter">SessionMemcachedStore</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;1999-2021, Christoph Zwerschke et al.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/ref/core/sessionfilestore.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

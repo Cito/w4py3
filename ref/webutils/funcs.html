@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Funcs &#8212; Webware for Python 3 3.0.2 documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="HTMLForException" href="htmlforexception.html" />
+    <link rel="prev" title="FieldStorage" href="fieldstorage.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-WebUtils.Funcs">
+<span id="funcs"></span><h1>Funcs<a class="headerlink" href="#module-WebUtils.Funcs" title="Permalink to this headline">¶</a></h1>
+<p>WebUtils.Funcs</p>
+<p>This module provides some basic functions that are useful
+in HTML and web development.</p>
+<p>You can safely import * from WebUtils.Funcs if you like.</p>
+<dl class="py function">
+<dt id="WebUtils.Funcs.htmlDecode">
+<code class="sig-prename descclassname">WebUtils.Funcs.</code><code class="sig-name descname">htmlDecode</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span></em>, <em class="sig-param"><span class="n">codes</span><span class="o">=</span><span class="default_value">(('&quot;', '&amp;quot;'), ('&gt;', '&amp;gt;'), ('&lt;', '&amp;lt;'), ('&amp;', '&amp;amp;'))</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.Funcs.htmlDecode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the ASCII decoded version of the given HTML string.</p>
+<p>This does NOT remove normal HTML tags like &lt;p&gt;.
+It is the inverse of htmlEncode().</p>
+<p>The optional ‘codes’ parameter allows passing custom translations.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="WebUtils.Funcs.htmlEncode">
+<code class="sig-prename descclassname">WebUtils.Funcs.</code><code class="sig-name descname">htmlEncode</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">what</span></em>, <em class="sig-param"><span class="n">codes</span><span class="o">=</span><span class="default_value">(('&amp;', '&amp;amp;'), ('&lt;', '&amp;lt;'), ('&gt;', '&amp;gt;'), ('&quot;', '&amp;quot;'))</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.Funcs.htmlEncode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the HTML encoded version of the given object.</p>
+<p>The optional ‘codes’ parameter allows passing custom translations.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="WebUtils.Funcs.htmlEncodeStr">
+<code class="sig-prename descclassname">WebUtils.Funcs.</code><code class="sig-name descname">htmlEncodeStr</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span></em>, <em class="sig-param"><span class="n">codes</span><span class="o">=</span><span class="default_value">(('&amp;', '&amp;amp;'), ('&lt;', '&amp;lt;'), ('&gt;', '&amp;gt;'), ('&quot;', '&amp;quot;'))</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.Funcs.htmlEncodeStr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the HTML encoded version of the given string.</p>
+<p>This is useful to display a plain ASCII text string on a web page.</p>
+<p>The optional ‘codes’ parameter allows passing custom translations.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="WebUtils.Funcs.htmlForDict">
+<code class="sig-prename descclassname">WebUtils.Funcs.</code><code class="sig-name descname">htmlForDict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">addSpace</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">filterValueCallBack</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maxValueLength</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">topHeading</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">isEncoded</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.Funcs.htmlForDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return HTML string with a table where each row is a key/value pair.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="WebUtils.Funcs.normURL">
+<code class="sig-prename descclassname">WebUtils.Funcs.</code><code class="sig-name descname">normURL</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.Funcs.normURL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalizes a URL path, like os.path.normpath.</p>
+<p>Acts on a URL independent of operating system environment.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="WebUtils.Funcs.requestURI">
+<code class="sig-prename descclassname">WebUtils.Funcs.</code><code class="sig-name descname">requestURI</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">env</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.Funcs.requestURI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the request URI for a given CGI-style dictionary.</p>
+<p>Uses REQUEST_URI if available, otherwise constructs and returns it
+from SCRIPT_URL, SCRIPT_NAME, PATH_INFO and QUERY_STRING.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="WebUtils.Funcs.urlDecode">
+<code class="sig-prename descclassname">WebUtils.Funcs.</code><code class="sig-name descname">urlDecode</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">string</span></em>, <em class="sig-param"><span class="n">encoding</span><span class="o">=</span><span class="default_value">'utf-8'</span></em>, <em class="sig-param"><span class="n">errors</span><span class="o">=</span><span class="default_value">'replace'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.Funcs.urlDecode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Like unquote(), but also replace plus signs by spaces, as required for
+unquoting HTML form values.</p>
+<p>unquote_plus(‘%7e/abc+def’) -&gt; ‘~/abc def’</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="WebUtils.Funcs.urlEncode">
+<code class="sig-prename descclassname">WebUtils.Funcs.</code><code class="sig-name descname">urlEncode</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">string</span></em>, <em class="sig-param"><span class="n">safe</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">encoding</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">errors</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.Funcs.urlEncode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Like quote(), but also replace ‘ ‘ with ‘+’, as required for quoting
+HTML form values. Plus signs in the original string are escaped unless
+they are included in safe. It also does not have safe default to ‘/’.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Webware for Python 3</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changes.html">List of Changes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migrate.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../copyright.html">Copyright and License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Beginner Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appdev.html">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../config.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deploy.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">Plug-ins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../style.html">Style Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../psp.html">PSP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../userkit.html">UserKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskkit.html">TaskKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../webutils.html">WebUtils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../miscutils.html">MiscUtils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../core/index.html">Core Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../psp/index.html">PSP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../userkit/index.html">UserKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../taskkit/index.html">TaskKit</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">WebUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscutils/index.html">MiscUtils</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">API Reference</a><ul>
+  <li><a href="index.html">WebUtils</a><ul>
+      <li>Previous: <a href="fieldstorage.html" title="previous chapter">FieldStorage</a></li>
+      <li>Next: <a href="htmlforexception.html" title="next chapter">HTMLForException</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;1999-2021, Christoph Zwerschke et al.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/ref/webutils/funcs.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

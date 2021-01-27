@@ -1,0 +1,236 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ImportManager &#8212; Webware for Python 3 3.0.2 documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="JSONRPCServlet" href="jsonrpcservlet.html" />
+    <link rel="prev" title="HTTPServlet" href="httpservlet.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-ImportManager">
+<span id="importmanager"></span><h1>ImportManager<a class="headerlink" href="#module-ImportManager" title="Permalink to this headline">¶</a></h1>
+<p>ImportManager</p>
+<p>Manages imported modules and protects against concurrent imports.</p>
+<p>Keeps lists of all imported Python modules and templates as well as other
+config files used by Webware for Python. Modules which are not directly
+imported can be monitored using hupper. This can be used to detect changes in
+source files, templates or config files in order to reload them automatically.</p>
+<dl class="py class">
+<dt id="ImportManager.ImportManager">
+<em class="property">class </em><code class="sig-prename descclassname">ImportManager.</code><code class="sig-name descname">ImportManager</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ImportManager.ImportManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The import manager.</p>
+<p>Keeps track of the Python modules and other system files that have been
+imported and are used by Webware.</p>
+<dl class="py method">
+<dt id="ImportManager.ImportManager.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ImportManager.ImportManager.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize import manager.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ImportManager.ImportManager.delModules">
+<code class="sig-name descname">delModules</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">includePythonModules</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">excludePrefixes</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ImportManager.ImportManager.delModules" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete imported modules.</p>
+<p>Deletes all the modules that have been imported unless they are part
+of Webware. This can be used to support auto reloading.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ImportManager.ImportManager.fileList">
+<code class="sig-name descname">fileList</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">update</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ImportManager.ImportManager.fileList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the list of tracked files.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ImportManager.ImportManager.fileUpdated">
+<code class="sig-name descname">fileUpdated</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">update=True</em>, <em class="sig-param">getmtime=&lt;function getmtime&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#ImportManager.ImportManager.fileUpdated" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether file has been updated.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ImportManager.ImportManager.findSpec">
+<code class="sig-name descname">findSpec</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">fullModuleName</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ImportManager.ImportManager.findSpec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the module spec for the given name at the given path.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ImportManager.ImportManager.getReloader">
+<code class="sig-name descname">getReloader</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ImportManager.ImportManager.getReloader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current reloader if the application is monitored.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ImportManager.ImportManager.moduleFromSpec">
+<code class="sig-name descname">moduleFromSpec</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">spec</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ImportManager.ImportManager.moduleFromSpec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load the module with the given module spec.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ImportManager.ImportManager.notifyOfNewFiles">
+<code class="sig-name descname">notifyOfNewFiles</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hook</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ImportManager.ImportManager.notifyOfNewFiles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register notification hook.</p>
+<p>Called by someone else to register that they’d like to know
+when a new file is imported.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ImportManager.ImportManager.recordFile">
+<code class="sig-name descname">recordFile</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">isfile=&lt;function isfile&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#ImportManager.ImportManager.recordFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Record a file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ImportManager.ImportManager.recordModule">
+<code class="sig-name descname">recordModule</code><span class="sig-paren">(</span><em class="sig-param">module</em>, <em class="sig-param">isfile=&lt;function isfile&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#ImportManager.ImportManager.recordModule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Record a module.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ImportManager.ImportManager.recordModules">
+<code class="sig-name descname">recordModules</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">moduleNames</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ImportManager.ImportManager.recordModules" title="Permalink to this definition">¶</a></dt>
+<dd><p>Record a list of modules (or all modules).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ImportManager.ImportManager.updatedFile">
+<code class="sig-name descname">updatedFile</code><span class="sig-paren">(</span><em class="sig-param">update=True</em>, <em class="sig-param">getmtime=&lt;function getmtime&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#ImportManager.ImportManager.updatedFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether one of the files has been updated.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ImportManager.ImportManager.watchFile">
+<code class="sig-name descname">watchFile</code><span class="sig-paren">(</span><em class="sig-param">path</em>, <em class="sig-param">moduleName=None</em>, <em class="sig-param">getmtime=&lt;function getmtime&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#ImportManager.ImportManager.watchFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add more files to watch without importing them.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Webware for Python 3</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changes.html">List of Changes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migrate.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../copyright.html">Copyright and License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Beginner Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appdev.html">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../config.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deploy.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">Plug-ins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../style.html">Style Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../psp.html">PSP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../userkit.html">UserKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskkit.html">TaskKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../webutils.html">WebUtils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../miscutils.html">MiscUtils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Core Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../psp/index.html">PSP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../userkit/index.html">UserKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../taskkit/index.html">TaskKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../webutils/index.html">WebUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscutils/index.html">MiscUtils</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">API Reference</a><ul>
+  <li><a href="index.html">Core Classes</a><ul>
+      <li>Previous: <a href="httpservlet.html" title="previous chapter">HTTPServlet</a></li>
+      <li>Next: <a href="jsonrpcservlet.html" title="next chapter">JSONRPCServlet</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;1999-2021, Christoph Zwerschke et al.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/ref/core/importmanager.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

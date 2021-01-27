@@ -1,0 +1,556 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scheduler &#8212; Webware for Python 3 3.0.2 documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="Task" href="task.html" />
+    <link rel="prev" title="TaskKit" href="index.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-TaskKit.Scheduler">
+<span id="scheduler"></span><h1>Scheduler<a class="headerlink" href="#module-TaskKit.Scheduler" title="Permalink to this headline">¶</a></h1>
+<p>This is the task manager Python package.</p>
+<p>It provides a system for running any number of predefined tasks in separate
+threads in an organized and controlled manner.</p>
+<p>A task in this package is a class derived from the Task class. The task
+should have a run method that, when called, performs some task.</p>
+<p>The Scheduler class is the organizing object. It manages the addition,
+execution, deletion, and well being of a number of tasks. Once you have
+created your task class, you call the Scheduler to get it added to the
+tasks to be run.</p>
+<dl class="py class">
+<dt id="TaskKit.Scheduler.Scheduler">
+<em class="property">class </em><code class="sig-prename descclassname">TaskKit.Scheduler.</code><code class="sig-name descname">Scheduler</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">daemon</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">exceptionHandler</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">threading.Thread</span></code></p>
+<p>The top level class of the task manager system.</p>
+<p>The Scheduler is a thread that handles organizing and running tasks.
+The Scheduler class should be instantiated to start a task manager session.
+Its start method should be called to start the task manager.
+Its stop method should be called to end the task manager session.</p>
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">daemon</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">exceptionHandler</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>This constructor should always be called with keyword arguments. Arguments are:</p>
+<p><em>group</em> should be None; reserved for future extension when a ThreadGroup
+class is implemented.</p>
+<p><em>target</em> is the callable object to be invoked by the run()
+method. Defaults to None, meaning nothing is called.</p>
+<p><em>name</em> is the thread name. By default, a unique name is constructed of
+the form “Thread-N” where N is a small decimal number.</p>
+<p><em>args</em> is the argument tuple for the target invocation. Defaults to ().</p>
+<p><em>kwargs</em> is a dictionary of keyword arguments for the target
+invocation. Defaults to {}.</p>
+<p>If a subclass overrides the constructor, it must make sure to invoke
+the base class constructor (Thread.__init__()) before doing anything
+else to the thread.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.addActionOnDemand">
+<code class="sig-name descname">addActionOnDemand</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">task</span></em>, <em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.addActionOnDemand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a task to be run only on demand.</p>
+<p>Adds a task to the scheduler that will not be scheduled
+until specifically requested.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.addDailyAction">
+<code class="sig-name descname">addDailyAction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hour</span></em>, <em class="sig-param"><span class="n">minute</span></em>, <em class="sig-param"><span class="n">task</span></em>, <em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.addDailyAction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add an action to be run every day at a specific time.</p>
+<p>If a task with the given name is already registered with the
+scheduler, that task will be removed from the scheduling queue
+and registered anew as a periodic task.</p>
+<p>Can we make this addCalendarAction? What if we want to run
+something once a week? We probably don’t need that for Webware,
+but this is a more generally useful module. This could be a
+difficult function, though. Particularly without mxDateTime.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.addPeriodicAction">
+<code class="sig-name descname">addPeriodicAction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">start</span></em>, <em class="sig-param"><span class="n">period</span></em>, <em class="sig-param"><span class="n">task</span></em>, <em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.addPeriodicAction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a task to be run periodically.</p>
+<p>Adds an action to be run at a specific initial time,
+and every period thereafter.</p>
+<p>The scheduler will not reschedule a task until the last
+scheduled instance of the task has completed.</p>
+<p>If a task with the given name is already registered with
+the scheduler, that task will be removed from the scheduling
+queue and registered anew as a periodic task.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.addTimedAction">
+<code class="sig-name descname">addTimedAction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">actionTime</span></em>, <em class="sig-param"><span class="n">task</span></em>, <em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.addTimedAction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a task to be run once, at a specific time.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.daemon">
+<em class="property">property </em><code class="sig-name descname">daemon</code><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.daemon" title="Permalink to this definition">¶</a></dt>
+<dd><p>A boolean value indicating whether this thread is a daemon thread.</p>
+<p>This must be set before start() is called, otherwise RuntimeError is
+raised. Its initial value is inherited from the creating thread; the
+main thread is not a daemon thread and therefore all threads created in
+the main thread default to daemon = False.</p>
+<p>The entire Python program exits when only daemon threads are left.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.delOnDemand">
+<code class="sig-name descname">delOnDemand</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.delOnDemand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete a task with the given name from the on demand list.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.delRunning">
+<code class="sig-name descname">delRunning</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.delRunning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete a task from the running list.</p>
+<p>Used internally.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.delScheduled">
+<code class="sig-name descname">delScheduled</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.delScheduled" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete a task with the given name from the scheduled list.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.demandTask">
+<code class="sig-name descname">demandTask</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.demandTask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Demand execution of a task.</p>
+<p>Allow the server to request that a task listed as being registered
+on-demand be run as soon as possible.</p>
+<p>If the task is currently running, it will be flagged to run again
+as soon as the current run completes.</p>
+<p>Returns False if the task name could not be found on the on-demand
+or currently running lists.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.disableTask">
+<code class="sig-name descname">disableTask</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.disableTask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specify that a task be suspended.</p>
+<p>Suspended tasks will not be scheduled until later enabled.
+If the task is currently running, it will not be interfered
+with, but the task will not be scheduled for execution in
+future until re-enabled.</p>
+<p>Returns True if the task was found and disabled.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.enableTask">
+<code class="sig-name descname">enableTask</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.enableTask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enable a task again.</p>
+<p>This method is provided to specify that a task be re-enabled
+after a suspension. A re-enabled task will be scheduled for
+execution according to its original schedule, with any runtimes
+that would have been issued during the time the task was suspended
+simply skipped.</p>
+<p>Returns True if the task was found and enabled.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.getName">
+<code class="sig-name descname">getName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.getName" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.hasOnDemand">
+<code class="sig-name descname">hasOnDemand</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.hasOnDemand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether task with given name is in the on demand list.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.hasRunning">
+<code class="sig-name descname">hasRunning</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.hasRunning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check to see if a task with the given name is currently running.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.hasScheduled">
+<code class="sig-name descname">hasScheduled</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.hasScheduled" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether task with given name is in the scheduled list.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.ident">
+<em class="property">property </em><code class="sig-name descname">ident</code><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.ident" title="Permalink to this definition">¶</a></dt>
+<dd><p>Thread identifier of this thread or None if it has not been started.</p>
+<p>This is a nonzero integer. See the get_ident() function. Thread
+identifiers may be recycled when a thread exits and another thread is
+created. The identifier is available even after the thread has exited.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.isAlive">
+<code class="sig-name descname">isAlive</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.isAlive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return whether the thread is alive.</p>
+<p>This method is deprecated, use is_alive() instead.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.isDaemon">
+<code class="sig-name descname">isDaemon</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.isDaemon" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.isRunning">
+<code class="sig-name descname">isRunning</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.isRunning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether thread is running.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.is_alive">
+<code class="sig-name descname">is_alive</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.is_alive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return whether the thread is alive.</p>
+<p>This method returns True just before the run() method starts until just
+after the run() method terminates. The module function enumerate()
+returns a list of all alive threads.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.join">
+<code class="sig-name descname">join</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">timeout</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.join" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wait until the thread terminates.</p>
+<p>This blocks the calling thread until the thread whose join() method is
+called terminates – either normally or through an unhandled exception
+or until the optional timeout occurs.</p>
+<p>When the timeout argument is present and not None, it should be a
+floating point number specifying a timeout for the operation in seconds
+(or fractions thereof). As join() always returns None, you must call
+is_alive() after join() to decide whether a timeout happened – if the
+thread is still alive, the join() call timed out.</p>
+<p>When the timeout argument is not present or None, the operation will
+block until the thread terminates.</p>
+<p>A thread can be join()ed many times.</p>
+<p>join() raises a RuntimeError if an attempt is made to join the current
+thread as that would cause a deadlock. It is also an error to join() a
+thread before it has been started and attempts to do so raises the same
+exception.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.name">
+<em class="property">property </em><code class="sig-name descname">name</code><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>A string used for identification purposes only.</p>
+<p>It has no semantics. Multiple threads may be given the same name. The
+initial name is set by the constructor.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.nextTime">
+<code class="sig-name descname">nextTime</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.nextTime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get next execution time.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.notify">
+<code class="sig-name descname">notify</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.notify" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wake up scheduler by sending a notify even.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.notifyCompletion">
+<code class="sig-name descname">notifyCompletion</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">handle</span></em><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.notifyCompletion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Notify completion of a task.</p>
+<p>Used by instances of TaskHandler to let the Scheduler thread know
+when their tasks have run to completion. This method is responsible
+for rescheduling the task if it is a periodic task.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.notifyFailure">
+<code class="sig-name descname">notifyFailure</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">handle</span></em><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.notifyFailure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Notify failure of a task.</p>
+<p>Used by instances of TaskHandler to let the Scheduler thread know
+if an exception has occurred within the task thread.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.onDemand">
+<code class="sig-name descname">onDemand</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">default</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.onDemand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a task from the onDemand list.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.onDemandTasks">
+<code class="sig-name descname">onDemandTasks</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.onDemandTasks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all on demand tasks.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.run">
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>The main method of the scheduler running as a background thread.</p>
+<p>This method is responsible for carrying out the scheduling work of
+this class on a background thread. The basic logic is to wait until
+the next action is due to run, move the task from our scheduled
+list to our running list, and run it. Other synchronized methods
+such as runTask(), scheduleTask(), and notifyCompletion(), may
+be called while this method is waiting for something to happen.
+These methods modify the data structures that run() uses to
+determine its scheduling needs.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.runTask">
+<code class="sig-name descname">runTask</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">handle</span></em><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.runTask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run a task.</p>
+<p>Used by the Scheduler thread’s main loop to put a task in
+the scheduled hash onto the run hash.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.runTaskNow">
+<code class="sig-name descname">runTaskNow</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.runTaskNow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allow a registered task to be immediately executed.</p>
+<p>Returns True if the task is either currently running or was started,
+or False if the task could not be found in the list of currently
+registered tasks.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.running">
+<code class="sig-name descname">running</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">default</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.running" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return running task with given name.</p>
+<p>Returns a task with the given name from the “running” list,
+if it is present there.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.runningTasks">
+<code class="sig-name descname">runningTasks</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.runningTasks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all running tasks.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.scheduleTask">
+<code class="sig-name descname">scheduleTask</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">handle</span></em><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.scheduleTask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Schedule a task.</p>
+<p>This method takes a task that needs to be scheduled and adds it
+to the scheduler. All scheduling additions or changes are handled
+by this method. This is the only Scheduler method that can notify
+the run() method that it may need to wake up early to handle a
+newly registered task.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.scheduled">
+<code class="sig-name descname">scheduled</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">default</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.scheduled" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a task from the scheduled list.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.scheduledTasks">
+<code class="sig-name descname">scheduledTasks</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.scheduledTasks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all scheduled tasks.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.setDaemon">
+<code class="sig-name descname">setDaemon</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">daemonic</span></em><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.setDaemon" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.setName">
+<code class="sig-name descname">setName</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.setName" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.setNextTime">
+<code class="sig-name descname">setNextTime</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">nextTime</span></em><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.setNextTime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set next execution time.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.setOnDemand">
+<code class="sig-name descname">setOnDemand</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">handle</span></em><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.setOnDemand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add the given task to the on demand list.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.setRunning">
+<code class="sig-name descname">setRunning</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">handle</span></em><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.setRunning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a task to the running dictionary.</p>
+<p>Used internally only.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.setScheduled">
+<code class="sig-name descname">setScheduled</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">handle</span></em><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.setScheduled" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add the given task to the scheduled list.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.start">
+<code class="sig-name descname">start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Start the scheduler’s activity.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.stop">
+<code class="sig-name descname">stop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.stop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Terminate the scheduler and its associated tasks.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.stopAllTasks">
+<code class="sig-name descname">stopAllTasks</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.stopAllTasks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Terminate all running tasks.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.stopTask">
+<code class="sig-name descname">stopTask</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.stopTask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Put an immediate halt to a running background task.</p>
+<p>Returns True if the task was either not running, or was
+running and was told to stop.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.unregisterTask">
+<code class="sig-name descname">unregisterTask</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.unregisterTask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unregisters the named task.</p>
+<p>After that it can be rescheduled with different parameters,
+or simply removed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="TaskKit.Scheduler.Scheduler.wait">
+<code class="sig-name descname">wait</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">seconds</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#TaskKit.Scheduler.Scheduler.wait" title="Permalink to this definition">¶</a></dt>
+<dd><p>Our own version of wait().</p>
+<p>When called, it waits for the specified number of seconds, or until
+it is notified that it needs to wake up, through the notify event.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Webware for Python 3</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changes.html">List of Changes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migrate.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../copyright.html">Copyright and License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Beginner Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appdev.html">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../config.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deploy.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">Plug-ins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../style.html">Style Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../psp.html">PSP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../userkit.html">UserKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskkit.html">TaskKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../webutils.html">WebUtils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../miscutils.html">MiscUtils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../core/index.html">Core Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../psp/index.html">PSP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../userkit/index.html">UserKit</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">TaskKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../webutils/index.html">WebUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscutils/index.html">MiscUtils</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">API Reference</a><ul>
+  <li><a href="index.html">TaskKit</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">TaskKit</a></li>
+      <li>Next: <a href="task.html" title="next chapter">Task</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;1999-2021, Christoph Zwerschke et al.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/ref/taskkit/scheduler.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

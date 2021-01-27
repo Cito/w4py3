@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ServletWriter &#8212; Webware for Python 3 3.0.2 documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="StreamReader" href="streamreader.html" />
+    <link rel="prev" title="PSPUtils" href="psputils.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-PSP.ServletWriter">
+<span id="servletwriter"></span><h1>ServletWriter<a class="headerlink" href="#module-PSP.ServletWriter" title="Permalink to this headline">¶</a></h1>
+<p>This module holds the actual file writer class.</p>
+<p>Copyright (c) by Jay Love, 2000 (<a class="reference external" href="mailto:jsliv&#37;&#52;&#48;jslove&#46;org">mailto:jsliv<span>&#64;</span>jslove<span>&#46;</span>org</a>)</p>
+<p>Permission to use, copy, modify, and distribute this software and its
+documentation for any purpose and without fee or royalty is hereby granted,
+provided that the above copyright notice appear in all copies and that
+both that copyright notice and this permission notice appear in
+supporting documentation or portions thereof, including modifications,
+that you make.</p>
+<p>This software is based in part on work done by the Jakarta group.</p>
+<dl class="py class">
+<dt id="PSP.ServletWriter.ServletWriter">
+<em class="property">class </em><code class="sig-prename descclassname">PSP.ServletWriter.</code><code class="sig-name descname">ServletWriter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ctxt</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ServletWriter.ServletWriter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This file creates the servlet source code.</p>
+<p>Well, it writes it out to a file at least.</p>
+<dl class="py method">
+<dt id="PSP.ServletWriter.ServletWriter.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ctxt</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ServletWriter.ServletWriter.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ServletWriter.ServletWriter.close">
+<code class="sig-name descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ServletWriter.ServletWriter.close" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ServletWriter.ServletWriter.indent">
+<code class="sig-name descname">indent</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ServletWriter.ServletWriter.indent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indent the string.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ServletWriter.ServletWriter.popIndent">
+<code class="sig-name descname">popIndent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ServletWriter.ServletWriter.popIndent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ServletWriter.ServletWriter.printChars">
+<code class="sig-name descname">printChars</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ServletWriter.ServletWriter.printChars" title="Permalink to this definition">¶</a></dt>
+<dd><p>Just prints what its given.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ServletWriter.ServletWriter.printComment">
+<code class="sig-name descname">printComment</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">start</span></em>, <em class="sig-param"><span class="n">stop</span></em>, <em class="sig-param"><span class="n">chars</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ServletWriter.ServletWriter.printComment" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ServletWriter.ServletWriter.printIndent">
+<code class="sig-name descname">printIndent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ServletWriter.ServletWriter.printIndent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Just prints tabs.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ServletWriter.ServletWriter.printList">
+<code class="sig-name descname">printList</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">strList</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ServletWriter.ServletWriter.printList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints a list of strings with indentation and a newline.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ServletWriter.ServletWriter.printMultiLn">
+<code class="sig-name descname">printMultiLn</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ServletWriter.ServletWriter.printMultiLn" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ServletWriter.ServletWriter.println">
+<code class="sig-name descname">println</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">line</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ServletWriter.ServletWriter.println" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print with indentation and a newline if none supplied.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ServletWriter.ServletWriter.pushIndent">
+<code class="sig-name descname">pushIndent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ServletWriter.ServletWriter.pushIndent" title="Permalink to this definition">¶</a></dt>
+<dd><p>this is very key, have to think more about it</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ServletWriter.ServletWriter.quoteString">
+<code class="sig-name descname">quoteString</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ServletWriter.ServletWriter.quoteString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Escape the string.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ServletWriter.ServletWriter.setIndentSpaces">
+<code class="sig-name descname">setIndentSpaces</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">amt</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ServletWriter.ServletWriter.setIndentSpaces" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ServletWriter.ServletWriter.setIndentType">
+<code class="sig-name descname">setIndentType</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">indentType</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ServletWriter.ServletWriter.setIndentType" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ServletWriter.ServletWriter.setIndention">
+<code class="sig-name descname">setIndention</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ServletWriter.ServletWriter.setIndention" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Webware for Python 3</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changes.html">List of Changes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migrate.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../copyright.html">Copyright and License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Beginner Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appdev.html">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../config.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deploy.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">Plug-ins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../style.html">Style Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../psp.html">PSP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../userkit.html">UserKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskkit.html">TaskKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../webutils.html">WebUtils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../miscutils.html">MiscUtils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../core/index.html">Core Classes</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">PSP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../userkit/index.html">UserKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../taskkit/index.html">TaskKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../webutils/index.html">WebUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscutils/index.html">MiscUtils</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">API Reference</a><ul>
+  <li><a href="index.html">PSP</a><ul>
+      <li>Previous: <a href="psputils.html" title="previous chapter">PSPUtils</a></li>
+      <li>Next: <a href="streamreader.html" title="next chapter">StreamReader</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;1999-2021, Christoph Zwerschke et al.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/ref/psp/servletwriter.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

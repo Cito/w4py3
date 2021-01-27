@@ -1,0 +1,460 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ExceptionHandler &#8212; Webware for Python 3 3.0.2 documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="HTTPContent" href="httpcontent.html" />
+    <link rel="prev" title="Cookie" href="cookie.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-ExceptionHandler">
+<span id="exceptionhandler"></span><h1>ExceptionHandler<a class="headerlink" href="#module-ExceptionHandler" title="Permalink to this headline">¶</a></h1>
+<p>Exception handling.</p>
+<dl class="py class">
+<dt id="ExceptionHandler.ExceptionHandler">
+<em class="property">class </em><code class="sig-prename descclassname">ExceptionHandler.</code><code class="sig-name descname">ExceptionHandler</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">application</span></em>, <em class="sig-param"><span class="n">transaction</span></em>, <em class="sig-param"><span class="n">excInfo</span></em>, <em class="sig-param"><span class="n">formatOptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ExceptionHandler.ExceptionHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Exception handling.</p>
+<p>ExceptionHandler is a utility class for Application that is created
+to handle a particular exception. The object is a one-shot deal.
+After handling an exception, it should be removed.</p>
+<p>At some point, the exception handler sends <cite>writeExceptionReport</cite> to the
+transaction (if present), which in turn sends it to the other transactional
+objects (application, request, response, etc.)  The handler is the single
+argument for this message.</p>
+<p>Classes may find it useful to do things like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">exceptionReportAttrs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;baz&#39;</span><span class="p">]</span>
+<span class="k">def</span> <span class="nf">writeExceptionReport</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">handler</span><span class="p">):</span>
+    <span class="n">handler</span><span class="o">.</span><span class="n">writeTitle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+    <span class="n">handler</span><span class="o">.</span><span class="n">writeAttrs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">exceptionReportAttrs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The handler write methods that may be useful are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>write</p></li>
+<li><p>writeTitle</p></li>
+<li><p>writeDict</p></li>
+<li><p>writeAttrs</p></li>
+</ul>
+</div></blockquote>
+<p>Derived classes must not assume that the error occurred in a
+transaction.  self._tra may be None for exceptions outside
+of transactions.</p>
+<p><strong>HOW TO CREATE A CUSTOM EXCEPTION HANDLER</strong></p>
+<p>In the <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> of your context:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ExceptionHandler</span> <span class="kn">import</span> <span class="n">ExceptionHandler</span> <span class="k">as</span> <span class="n">_ExceptionHandler</span>
+
+<span class="k">class</span> <span class="nc">ExceptionHandler</span><span class="p">(</span><span class="n">_ExceptionHandler</span><span class="p">):</span>
+
+    <span class="n">_hideValuesForFields</span> <span class="o">=</span> <span class="n">_ExceptionHandler</span><span class="o">.</span><span class="n">_hideValuesForFields</span> <span class="o">+</span> <span class="p">[</span>
+        <span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">work</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">_ExceptionHandler</span><span class="o">.</span><span class="n">work</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="c1"># do whatever</span>
+        <span class="c1"># override other methods if you like</span>
+
+<span class="k">def</span> <span class="nf">contextInitialize</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">ctxPath</span><span class="p">):</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">_exceptionHandlerClass</span> <span class="o">=</span> <span class="n">ExceptionHandler</span>
+</pre></div>
+</div>
+<p>You can also control the errors with settings in <code class="docutils literal notranslate"><span class="pre">Application.config</span></code>.</p>
+<dl class="py method">
+<dt id="ExceptionHandler.ExceptionHandler.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">application</span></em>, <em class="sig-param"><span class="n">transaction</span></em>, <em class="sig-param"><span class="n">excInfo</span></em>, <em class="sig-param"><span class="n">formatOptions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ExceptionHandler.ExceptionHandler.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an exception handler instance.</p>
+<p>ExceptionHandler instances are created anew for each exception.
+Instantiating ExceptionHandler completes the process –
+the caller need not do anything else.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ExceptionHandler.ExceptionHandler.basicServletName">
+<code class="sig-name descname">basicServletName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ExceptionHandler.ExceptionHandler.basicServletName" title="Permalink to this definition">¶</a></dt>
+<dd><p>The base name for the servlet (sans directory).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ExceptionHandler.ExceptionHandler.emailException">
+<code class="sig-name descname">emailException</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">htmlErrMsg</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ExceptionHandler.ExceptionHandler.emailException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Email the exception.</p>
+<p>Send the exception via mail, either as an attachment,
+or as the body of the mail.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ExceptionHandler.ExceptionHandler.errorPageFilename">
+<code class="sig-name descname">errorPageFilename</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ExceptionHandler.ExceptionHandler.errorPageFilename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create filename for error page.</p>
+<p>Construct a filename for an HTML error page, not including the
+<code class="docutils literal notranslate"><span class="pre">ErrorMessagesDir</span></code> setting (which <cite>saveError</cite> adds on).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ExceptionHandler.ExceptionHandler.filterDictValue">
+<code class="sig-name descname">filterDictValue</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">key</span></em>, <em class="sig-param"><span class="n">_dict</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ExceptionHandler.ExceptionHandler.filterDictValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter dictionary values.</p>
+<p>Filters keys from a dict.  Currently ignores the
+dictionary, and just filters based on the key.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ExceptionHandler.ExceptionHandler.filterValue">
+<code class="sig-name descname">filterValue</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">key</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ExceptionHandler.ExceptionHandler.filterValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter values.</p>
+<p>This is the core filter method that is used in all filtering.
+By default, it simply returns self._hiddenString if the key is
+in self._hideValuesForField (case insensitive). Subclasses
+could override for more elaborate filtering techniques.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ExceptionHandler.ExceptionHandler.htmlDebugInfo">
+<code class="sig-name descname">htmlDebugInfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ExceptionHandler.ExceptionHandler.htmlDebugInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the debug info.</p>
+<p>Return HTML-formatted debugging information on the current exception.
+Calls <cite>writeHTML</cite>, which uses <code class="docutils literal notranslate"><span class="pre">self.write(...)</span></code> to add content.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ExceptionHandler.ExceptionHandler.logExceptionToConsole">
+<code class="sig-name descname">logExceptionToConsole</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">stderr</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ExceptionHandler.ExceptionHandler.logExceptionToConsole" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log an exception.</p>
+<p>Logs the time, servlet name and traceback to the console
+(typically stderr). This usually results in the information
+appearing in console/terminal from which the Application was launched.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ExceptionHandler.ExceptionHandler.logExceptionToDisk">
+<code class="sig-name descname">logExceptionToDisk</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">errorMsgFilename</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ExceptionHandler.ExceptionHandler.logExceptionToDisk" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log the exception to disk.</p>
+<p>Writes a tuple containing (date-time, filename, pathname,
+exception-name, exception-data, error report filename)
+to the errors file (typically ‘Errors.csv’) in CSV format.
+Invoked by <cite>handleException</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ExceptionHandler.ExceptionHandler.privateErrorPage">
+<code class="sig-name descname">privateErrorPage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ExceptionHandler.ExceptionHandler.privateErrorPage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a private error page.</p>
+<p>Returns an HTML page intended for the developer with
+useful information such as the traceback.</p>
+<p>Most of the contents are generated in <cite>htmlDebugInfo</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ExceptionHandler.ExceptionHandler.publicErrorPage">
+<code class="sig-name descname">publicErrorPage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ExceptionHandler.ExceptionHandler.publicErrorPage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a public error page.</p>
+<p>Returns a brief error page telling the user that an error has occurred.
+Body of the message comes from <code class="docutils literal notranslate"><span class="pre">UserErrorMessage</span></code> setting.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ExceptionHandler.ExceptionHandler.repr">
+<code class="sig-name descname">repr</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ExceptionHandler.ExceptionHandler.repr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get HTML encoded representation.</p>
+<p>Returns the repr() of value already HTML encoded. As a special case,
+dictionaries are nicely formatted in table.</p>
+<p>This is a utility method for <cite>writeAttrs</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ExceptionHandler.ExceptionHandler.saveErrorPage">
+<code class="sig-name descname">saveErrorPage</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">html</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ExceptionHandler.ExceptionHandler.saveErrorPage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the error page.</p>
+<p>Saves the given HTML error page for later viewing by
+the developer, and returns the filename used.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ExceptionHandler.ExceptionHandler.servletPathname">
+<code class="sig-name descname">servletPathname</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ExceptionHandler.ExceptionHandler.servletPathname" title="Permalink to this definition">¶</a></dt>
+<dd><p>The full filesystem path for the servlet.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ExceptionHandler.ExceptionHandler.setting">
+<code class="sig-name descname">setting</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ExceptionHandler.ExceptionHandler.setting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Settings are inherited from Application.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ExceptionHandler.ExceptionHandler.work">
+<code class="sig-name descname">work</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ExceptionHandler.ExceptionHandler.work" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main error handling method.</p>
+<p>Invoked by <code class="docutils literal notranslate"><span class="pre">__init__</span></code> to do the main work. This calls
+<cite>logExceptionToConsole</cite>, then checks settings to see if it should call
+<cite>saveErrorPage</cite> (to save the error to disk) and <cite>emailException</cite>.</p>
+<p>It also sends gives a page from <cite>privateErrorPage</cite> or
+<cite>publicErrorPage</cite> (which one based on <cite>ShowDebugInfoOnErrors</cite>).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ExceptionHandler.ExceptionHandler.write">
+<code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ExceptionHandler.ExceptionHandler.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output <cite>s</cite> to the body.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ExceptionHandler.ExceptionHandler.writeAttrs">
+<code class="sig-name descname">writeAttrs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj</span></em>, <em class="sig-param"><span class="n">attrNames</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ExceptionHandler.ExceptionHandler.writeAttrs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output object attributes.</p>
+<p>Writes the attributes of the object as given by attrNames.
+Tries <code class="docutils literal notranslate"><span class="pre">obj._name</span></code> first, followed by <code class="docutils literal notranslate"><span class="pre">obj.name()</span></code>.
+Is resilient regarding exceptions so as not to spoil the
+exception report.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ExceptionHandler.ExceptionHandler.writeDict">
+<code class="sig-name descname">writeDict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">heading</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">encoded</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ExceptionHandler.ExceptionHandler.writeDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output a table-formatted dictionary.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ExceptionHandler.ExceptionHandler.writeEnvironment">
+<code class="sig-name descname">writeEnvironment</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ExceptionHandler.ExceptionHandler.writeEnvironment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output environment.</p>
+<p>Writes the environment this is being run in. This is <em>not</em> the
+environment that was passed in with the request (holding the CGI
+information) – it’s just the information from the environment
+that the Application is being executed in.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ExceptionHandler.ExceptionHandler.writeFancyTraceback">
+<code class="sig-name descname">writeFancyTraceback</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ExceptionHandler.ExceptionHandler.writeFancyTraceback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output a fancy traceback, using CGITraceback.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ExceptionHandler.ExceptionHandler.writeHTML">
+<code class="sig-name descname">writeHTML</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ExceptionHandler.ExceptionHandler.writeHTML" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write the traceback.</p>
+<dl class="simple">
+<dt>Writes all the parts of the traceback, invoking:</dt><dd><ul class="simple">
+<li><p><cite>writeTraceback</cite></p></li>
+<li><p><cite>writeMiscInfo</cite></p></li>
+<li><p><cite>writeTransaction</cite></p></li>
+<li><p><cite>writeEnvironment</cite></p></li>
+<li><p><cite>writeIds</cite></p></li>
+<li><p><cite>writeFancyTraceback</cite></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ExceptionHandler.ExceptionHandler.writeIds">
+<code class="sig-name descname">writeIds</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ExceptionHandler.ExceptionHandler.writeIds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output OS identification.</p>
+<p>Prints some values from the OS (like processor ID).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ExceptionHandler.ExceptionHandler.writeMiscInfo">
+<code class="sig-name descname">writeMiscInfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ExceptionHandler.ExceptionHandler.writeMiscInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output misc info.</p>
+<p>Write a couple little pieces of information about the environment.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ExceptionHandler.ExceptionHandler.writeTitle">
+<code class="sig-name descname">writeTitle</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ExceptionHandler.ExceptionHandler.writeTitle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output the sub-heading to define a section.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ExceptionHandler.ExceptionHandler.writeTraceback">
+<code class="sig-name descname">writeTraceback</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ExceptionHandler.ExceptionHandler.writeTraceback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output the traceback.</p>
+<p>Writes the traceback, with most of the work done
+by <cite>WebUtils.HTMLForException.htmlForException</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ExceptionHandler.ExceptionHandler.writeTransaction">
+<code class="sig-name descname">writeTransaction</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ExceptionHandler.ExceptionHandler.writeTransaction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output transaction.</p>
+<p>Lets the transaction talk about itself, using
+<cite>Transaction.writeExceptionReport</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ExceptionHandler.ExceptionHandler.writeln">
+<code class="sig-name descname">writeln</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ExceptionHandler.ExceptionHandler.writeln" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output <cite>s</cite> plus a newline.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ExceptionHandler.Singleton">
+<em class="property">class </em><code class="sig-prename descclassname">ExceptionHandler.</code><code class="sig-name descname">Singleton</code><a class="headerlink" href="#ExceptionHandler.Singleton" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A singleton object.</p>
+<dl class="py method">
+<dt id="ExceptionHandler.Singleton.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ExceptionHandler.Singleton.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="ExceptionHandler.docType">
+<code class="sig-prename descclassname">ExceptionHandler.</code><code class="sig-name descname">docType</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ExceptionHandler.docType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the document type for the page.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ExceptionHandler.htStyle">
+<code class="sig-prename descclassname">ExceptionHandler.</code><code class="sig-name descname">htStyle</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ExceptionHandler.htStyle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the page style.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ExceptionHandler.htTitle">
+<code class="sig-prename descclassname">ExceptionHandler.</code><code class="sig-name descname">htTitle</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ExceptionHandler.htTitle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Format a <cite>name</cite> as a section title.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ExceptionHandler.osIdDict">
+<code class="sig-prename descclassname">ExceptionHandler.</code><code class="sig-name descname">osIdDict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ExceptionHandler.osIdDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all OS id information.</p>
+<p>Returns a dictionary containing id information such as pid and uid.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Webware for Python 3</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changes.html">List of Changes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migrate.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../copyright.html">Copyright and License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Beginner Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appdev.html">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../config.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deploy.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">Plug-ins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../style.html">Style Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../psp.html">PSP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../userkit.html">UserKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskkit.html">TaskKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../webutils.html">WebUtils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../miscutils.html">MiscUtils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Core Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../psp/index.html">PSP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../userkit/index.html">UserKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../taskkit/index.html">TaskKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../webutils/index.html">WebUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscutils/index.html">MiscUtils</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">API Reference</a><ul>
+  <li><a href="index.html">Core Classes</a><ul>
+      <li>Previous: <a href="cookie.html" title="previous chapter">Cookie</a></li>
+      <li>Next: <a href="httpcontent.html" title="next chapter">HTTPContent</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;1999-2021, Christoph Zwerschke et al.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/ref/core/exceptionhandler.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

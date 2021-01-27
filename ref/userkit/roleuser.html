@@ -1,0 +1,283 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RoleUser &#8212; Webware for Python 3 3.0.2 documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="RoleUserManager" href="roleusermanager.html" />
+    <link rel="prev" title="Role" href="role.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-UserKit.RoleUser">
+<span id="roleuser"></span><h1>RoleUser<a class="headerlink" href="#module-UserKit.RoleUser" title="Permalink to this headline">¶</a></h1>
+<p>The RoleUser class.</p>
+<dl class="py class">
+<dt id="UserKit.RoleUser.RoleUser">
+<em class="property">class </em><code class="sig-prename descclassname">UserKit.RoleUser.</code><code class="sig-name descname">RoleUser</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">manager</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">password</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.RoleUser.RoleUser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="user.html#UserKit.User.User" title="UserKit.User.User"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserKit.User.User</span></code></a></p>
+<p>In conjunction with Role, provides role-based users and security.</p>
+<p>See the doc for playsRole() for an example.</p>
+<p>Note that this class plays nicely with both Role and HierRole,
+e.g., no “HierRoleUser” is needed when making use of HierRoles.</p>
+<dl class="simple">
+<dt>See also:</dt><dd><ul class="simple">
+<li><p>class Role</p></li>
+<li><p>class HierRole</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="UserKit.RoleUser.RoleUser.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">manager</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">password</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.RoleUser.RoleUser.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="UserKit.RoleUser.RoleUser.addRoles">
+<code class="sig-name descname">addRoles</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">listOfRoles</span></em><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.RoleUser.RoleUser.addRoles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add additional roles for the user.</p>
+<p>Each role in the list may be a valid role name or a Role object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="UserKit.RoleUser.RoleUser.creationTime">
+<code class="sig-name descname">creationTime</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.RoleUser.RoleUser.creationTime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="UserKit.RoleUser.RoleUser.externalId">
+<code class="sig-name descname">externalId</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.RoleUser.RoleUser.externalId" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="UserKit.RoleUser.RoleUser.isActive">
+<code class="sig-name descname">isActive</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.RoleUser.RoleUser.isActive" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="UserKit.RoleUser.RoleUser.lastAccessTime">
+<code class="sig-name descname">lastAccessTime</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.RoleUser.RoleUser.lastAccessTime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="UserKit.RoleUser.RoleUser.lastLoginTime">
+<code class="sig-name descname">lastLoginTime</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.RoleUser.RoleUser.lastLoginTime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="UserKit.RoleUser.RoleUser.login">
+<code class="sig-name descname">login</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">password</span></em>, <em class="sig-param"><span class="n">fromMgr</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.RoleUser.RoleUser.login" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return self if the login is successful and None otherwise.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="UserKit.RoleUser.RoleUser.logout">
+<code class="sig-name descname">logout</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fromMgr</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.RoleUser.RoleUser.logout" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="UserKit.RoleUser.RoleUser.manager">
+<code class="sig-name descname">manager</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.RoleUser.RoleUser.manager" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="UserKit.RoleUser.RoleUser.name">
+<code class="sig-name descname">name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.RoleUser.RoleUser.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="UserKit.RoleUser.RoleUser.password">
+<code class="sig-name descname">password</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.RoleUser.RoleUser.password" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="UserKit.RoleUser.RoleUser.playsRole">
+<code class="sig-name descname">playsRole</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">roleOrName</span></em><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.RoleUser.RoleUser.playsRole" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether the user plays the given role.</p>
+<p>More specifically, if any of the user’s roles return true for
+role.playsRole(otherRole), this method returns True.</p>
+<dl class="simple">
+<dt>The application of this popular method often looks like this:</dt><dd><dl class="simple">
+<dt>if user.playsRole(‘admin’):</dt><dd><p>self.displayAdminMenuItems()</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="UserKit.RoleUser.RoleUser.roles">
+<code class="sig-name descname">roles</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.RoleUser.RoleUser.roles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a direct list of the user’s roles.</p>
+<p>Do not modify.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="UserKit.RoleUser.RoleUser.serialNum">
+<code class="sig-name descname">serialNum</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.RoleUser.RoleUser.serialNum" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="UserKit.RoleUser.RoleUser.setManager">
+<code class="sig-name descname">setManager</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">manager</span></em><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.RoleUser.RoleUser.setManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the manager, which can only be done once.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="UserKit.RoleUser.RoleUser.setName">
+<code class="sig-name descname">setName</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.RoleUser.RoleUser.setName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the name, which can only be done once.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="UserKit.RoleUser.RoleUser.setPassword">
+<code class="sig-name descname">setPassword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">password</span></em><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.RoleUser.RoleUser.setPassword" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="UserKit.RoleUser.RoleUser.setRoles">
+<code class="sig-name descname">setRoles</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">listOfRoles</span></em><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.RoleUser.RoleUser.setRoles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set all the roles for the user.</p>
+<p>Each role in the list may be a valid role name or a Role object.</p>
+<p>Implementation note: depends on addRoles().</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="UserKit.RoleUser.RoleUser.setSerialNum">
+<code class="sig-name descname">setSerialNum</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">serialNum</span></em><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.RoleUser.RoleUser.setSerialNum" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="UserKit.RoleUser.RoleUser.wasAccessed">
+<code class="sig-name descname">wasAccessed</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.RoleUser.RoleUser.wasAccessed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Webware for Python 3</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changes.html">List of Changes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migrate.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../copyright.html">Copyright and License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Beginner Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appdev.html">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../config.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deploy.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">Plug-ins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../style.html">Style Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../psp.html">PSP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../userkit.html">UserKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskkit.html">TaskKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../webutils.html">WebUtils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../miscutils.html">MiscUtils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../core/index.html">Core Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../psp/index.html">PSP</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">UserKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../taskkit/index.html">TaskKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../webutils/index.html">WebUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscutils/index.html">MiscUtils</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">API Reference</a><ul>
+  <li><a href="index.html">UserKit</a><ul>
+      <li>Previous: <a href="role.html" title="previous chapter">Role</a></li>
+      <li>Next: <a href="roleusermanager.html" title="next chapter">RoleUserManager</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;1999-2021, Christoph Zwerschke et al.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/ref/userkit/roleuser.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

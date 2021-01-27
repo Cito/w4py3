@@ -1,0 +1,297 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transaction &#8212; Webware for Python 3 3.0.2 documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="UnknownFileTypeServlet" href="unknownfiletypeservlet.html" />
+    <link rel="prev" title="SidebarPage" href="sidebarpage.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-Transaction">
+<span id="transaction"></span><h1>Transaction<a class="headerlink" href="#module-Transaction" title="Permalink to this headline">¶</a></h1>
+<p>The Transaction container.</p>
+<dl class="py class">
+<dt id="Transaction.Transaction">
+<em class="property">class </em><code class="sig-prename descclassname">Transaction.</code><code class="sig-name descname">Transaction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">application</span></em>, <em class="sig-param"><span class="n">request</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Transaction.Transaction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The Transaction container.</p>
+<p>A transaction serves as:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>A container for all objects involved in the transaction.
+The objects include application, request, response, session
+and servlet.</p></li>
+<li><p>A message dissemination point. The messages include awake(),
+respond() and sleep().</p></li>
+</ul>
+</div></blockquote>
+<p>When first created, a transaction has no session. However, it will
+create or retrieve one upon being asked for session().</p>
+<p>The life cycle of a transaction begins and ends with Application’s
+dispatchRequest().</p>
+<dl class="py method">
+<dt id="Transaction.Transaction.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">application</span></em>, <em class="sig-param"><span class="n">request</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Transaction.Transaction.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Transaction.Transaction.application">
+<code class="sig-name descname">application</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Transaction.Transaction.application" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the corresponding application.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Transaction.Transaction.awake">
+<code class="sig-name descname">awake</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Transaction.Transaction.awake" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send awake() to the session (if there is one) and the servlet.</p>
+<p>Currently, the request and response do not partake in the
+awake()-respond()-sleep() cycle. This could definitely be added
+in the future if any use was demonstrated for it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Transaction.Transaction.die">
+<code class="sig-name descname">die</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Transaction.Transaction.die" title="Permalink to this definition">¶</a></dt>
+<dd><p>End transaction.</p>
+<p>This method should be invoked when the entire transaction is finished
+with. Currently, this is invoked by the Application. This method
+removes references to the different objects in the transaction,
+breaking cyclic reference chains and speeding up garbage collection.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Transaction.Transaction.dump">
+<code class="sig-name descname">dump</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Transaction.Transaction.dump" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dump debugging info to stdout.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Transaction.Transaction.duration">
+<code class="sig-name descname">duration</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Transaction.Transaction.duration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the duration, in seconds, of the transaction.</p>
+<p>This is basically the response end time minus the request start time.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Transaction.Transaction.error">
+<code class="sig-name descname">error</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Transaction.Transaction.error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return Exception instance if there was any.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Transaction.Transaction.errorOccurred">
+<code class="sig-name descname">errorOccurred</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Transaction.Transaction.errorOccurred" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether a server error occurred.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Transaction.Transaction.hasSession">
+<code class="sig-name descname">hasSession</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Transaction.Transaction.hasSession" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return true if the transaction has a session.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Transaction.Transaction.request">
+<code class="sig-name descname">request</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Transaction.Transaction.request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the corresponding request.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Transaction.Transaction.respond">
+<code class="sig-name descname">respond</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Transaction.Transaction.respond" title="Permalink to this definition">¶</a></dt>
+<dd><p>Respond to the request.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Transaction.Transaction.response">
+<code class="sig-name descname">response</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Transaction.Transaction.response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the corresponding response.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Transaction.Transaction.servlet">
+<code class="sig-name descname">servlet</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Transaction.Transaction.servlet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the current servlet that is processing.</p>
+<p>Remember that servlets can be nested.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Transaction.Transaction.session">
+<code class="sig-name descname">session</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Transaction.Transaction.session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the session for the transaction.</p>
+<p>A new transaction is created if necessary. Therefore, this method
+never returns None. Use hasSession() if you want to find out if
+a session already exists.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Transaction.Transaction.setError">
+<code class="sig-name descname">setError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">err</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Transaction.Transaction.setError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set Exception instance.</p>
+<p>Invoked by the application if an Exception is raised to the
+application level.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Transaction.Transaction.setResponse">
+<code class="sig-name descname">setResponse</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">response</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Transaction.Transaction.setResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the corresponding response.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Transaction.Transaction.setServlet">
+<code class="sig-name descname">setServlet</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">servlet</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Transaction.Transaction.setServlet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the servlet for processing the transaction.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Transaction.Transaction.setSession">
+<code class="sig-name descname">setSession</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">session</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Transaction.Transaction.setSession" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the session for the transaction.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Transaction.Transaction.sleep">
+<code class="sig-name descname">sleep</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Transaction.Transaction.sleep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send sleep() to the session and the servlet.</p>
+<p>Note that sleep() is sent in reverse order as awake()
+(which is typical for shutdown/cleanup methods).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Transaction.Transaction.writeExceptionReport">
+<code class="sig-name descname">writeExceptionReport</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">handler</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Transaction.Transaction.writeExceptionReport" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write extra information to the exception report.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Webware for Python 3</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changes.html">List of Changes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migrate.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../copyright.html">Copyright and License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Beginner Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appdev.html">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../config.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deploy.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">Plug-ins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../style.html">Style Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../psp.html">PSP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../userkit.html">UserKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskkit.html">TaskKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../webutils.html">WebUtils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../miscutils.html">MiscUtils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Core Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../psp/index.html">PSP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../userkit/index.html">UserKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../taskkit/index.html">TaskKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../webutils/index.html">WebUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscutils/index.html">MiscUtils</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">API Reference</a><ul>
+  <li><a href="index.html">Core Classes</a><ul>
+      <li>Previous: <a href="sidebarpage.html" title="previous chapter">SidebarPage</a></li>
+      <li>Next: <a href="unknownfiletypeservlet.html" title="next chapter">UnknownFileTypeServlet</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;1999-2021, Christoph Zwerschke et al.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/ref/core/transaction.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

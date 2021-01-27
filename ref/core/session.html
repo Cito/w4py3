@@ -1,0 +1,331 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session &#8212; Webware for Python 3 3.0.2 documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="SessionDynamicStore" href="sessiondynamicstore.html" />
+    <link rel="prev" title="ServletFactory" href="servletfactory.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-Session">
+<span id="session"></span><h1>Session<a class="headerlink" href="#module-Session" title="Permalink to this headline">¶</a></h1>
+<p>Implementation of client sessions.</p>
+<dl class="py class">
+<dt id="Session.Session">
+<em class="property">class </em><code class="sig-prename descclassname">Session.</code><code class="sig-name descname">Session</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">trans</span></em>, <em class="sig-param"><span class="n">identifier</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Session.Session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Implementation of client sessions.</p>
+<p>All methods that deal with time stamps, such as creationTime(),
+treat time as the number of seconds since January 1, 1970.</p>
+<p>Session identifiers are stored in cookies. Therefore, clients
+must have cookies enabled.</p>
+<p>Note that the session id should be a string that is valid
+as part of a filename. This is currently true, and should
+be maintained if the session id generation technique is
+modified. Session ids can be used in filenames.</p>
+<dl class="py method">
+<dt id="Session.Session.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">trans</span></em>, <em class="sig-param"><span class="n">identifier</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Session.Session.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Session.Session.awake">
+<code class="sig-name descname">awake</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">_trans</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Session.Session.awake" title="Permalink to this definition">¶</a></dt>
+<dd><p>Let the session awake.</p>
+<p>Invoked during the beginning of a transaction, giving a Session an
+opportunity to perform any required setup. The default implementation
+updates the ‘lastAccessTime’.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Session.Session.creationTime">
+<code class="sig-name descname">creationTime</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Session.Session.creationTime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the time when this session was created.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Session.Session.delValue">
+<code class="sig-name descname">delValue</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Session.Session.delValue" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="Session.Session.expiring">
+<code class="sig-name descname">expiring</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Session.Session.expiring" title="Permalink to this definition">¶</a></dt>
+<dd><p>Let the session expire.</p>
+<p>Called when session is expired by the application.
+Subclasses should invoke super.
+Session store __delitem__()s should invoke if not isExpired().</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Session.Session.hasValue">
+<code class="sig-name descname">hasValue</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Session.Session.hasValue" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="Session.Session.identifier">
+<code class="sig-name descname">identifier</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Session.Session.identifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a string that uniquely identifies the session.</p>
+<p>This method will create the identifier if needed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Session.Session.invalidate">
+<code class="sig-name descname">invalidate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Session.Session.invalidate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Invalidate the session.</p>
+<p>It will be discarded the next time it is accessed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Session.Session.isDirty">
+<code class="sig-name descname">isDirty</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Session.Session.isDirty" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether the session is dirty (has unsaved changes).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Session.Session.isExpired">
+<code class="sig-name descname">isExpired</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Session.Session.isExpired" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether the session has been previously expired.</p>
+<p>See also: expiring()</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Session.Session.isNew">
+<code class="sig-name descname">isNew</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Session.Session.isNew" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether the session is new.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Session.Session.lastAccessTime">
+<code class="sig-name descname">lastAccessTime</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Session.Session.lastAccessTime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get last access time.</p>
+<p>Returns the last time the user accessed the session through
+interaction. This attribute is updated in awake(), which is
+invoked at the beginning of a transaction.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Session.Session.numTransactions">
+<code class="sig-name descname">numTransactions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Session.Session.numTransactions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get number of transactions.</p>
+<p>Returns the number of transactions in which the session has been used.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Session.Session.respond">
+<code class="sig-name descname">respond</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">trans</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Session.Session.respond" title="Permalink to this definition">¶</a></dt>
+<dd><p>Let the session respond to a request.</p>
+<p>The default implementation does nothing, but could do something
+in the future. Subclasses should invoke super.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Session.Session.sessionEncode">
+<code class="sig-name descname">sessionEncode</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">url</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Session.Session.sessionEncode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Encode the session ID as a parameter to a url.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Session.Session.setDirty">
+<code class="sig-name descname">setDirty</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dirty</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Session.Session.setDirty" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the dirty status of the session.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Session.Session.setTimeout">
+<code class="sig-name descname">setTimeout</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">timeout</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Session.Session.setTimeout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the timeout on this session in seconds.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Session.Session.setValue">
+<code class="sig-name descname">setValue</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Session.Session.setValue" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="Session.Session.sleep">
+<code class="sig-name descname">sleep</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">trans</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Session.Session.sleep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Let the session sleep again.</p>
+<p>Invoked during the ending of a transaction, giving a Session an
+opportunity to perform any required shutdown. The default
+implementation does nothing, but could do something in the future.
+Subclasses should invoke super.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Session.Session.timeout">
+<code class="sig-name descname">timeout</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Session.Session.timeout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the timeout for this session in seconds.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Session.Session.value">
+<code class="sig-name descname">value</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">default=&lt;class 'MiscUtils.NoDefault'&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#Session.Session.value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="Session.Session.values">
+<code class="sig-name descname">values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Session.Session.values" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="Session.Session.writeExceptionReport">
+<code class="sig-name descname">writeExceptionReport</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">handler</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Session.Session.writeExceptionReport" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt id="Session.SessionError">
+<em class="property">exception </em><code class="sig-prename descclassname">Session.</code><code class="sig-name descname">SessionError</code><a class="headerlink" href="#Session.SessionError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Client session error</p>
+<dl class="py method">
+<dt id="Session.SessionError.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Session.SessionError.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="Session.SessionError.args">
+<code class="sig-name descname">args</code><a class="headerlink" href="#Session.SessionError.args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="Session.SessionError.with_traceback">
+<code class="sig-name descname">with_traceback</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Session.SessionError.with_traceback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Webware for Python 3</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changes.html">List of Changes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migrate.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../copyright.html">Copyright and License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Beginner Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appdev.html">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../config.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deploy.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">Plug-ins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../style.html">Style Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../psp.html">PSP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../userkit.html">UserKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskkit.html">TaskKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../webutils.html">WebUtils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../miscutils.html">MiscUtils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Core Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../psp/index.html">PSP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../userkit/index.html">UserKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../taskkit/index.html">TaskKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../webutils/index.html">WebUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscutils/index.html">MiscUtils</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">API Reference</a><ul>
+  <li><a href="index.html">Core Classes</a><ul>
+      <li>Previous: <a href="servletfactory.html" title="previous chapter">ServletFactory</a></li>
+      <li>Next: <a href="sessiondynamicstore.html" title="next chapter">SessionDynamicStore</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;1999-2021, Christoph Zwerschke et al.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/ref/core/session.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

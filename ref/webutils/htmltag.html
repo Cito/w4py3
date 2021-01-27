@@ -1,0 +1,862 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTMLTag &#8212; Webware for Python 3 3.0.2 documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="HTTPStatusCodes" href="httpstatuscodes.html" />
+    <link rel="prev" title="HTMLForException" href="htmlforexception.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-WebUtils.HTMLTag">
+<span id="htmltag"></span><h1>HTMLTag<a class="headerlink" href="#module-WebUtils.HTMLTag" title="Permalink to this headline">¶</a></h1>
+<p>HTMLTag.py</p>
+<p>HTMLTag defines a class of the same name that represents HTML content.
+An additional HTMLReader class kicks off the process of reading an HTML
+file into a set of tags:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">WebUtils.HTMLTag</span> <span class="kn">import</span> <span class="n">HTMLReader</span>
+<span class="n">reader</span> <span class="o">=</span> <span class="n">HTMLReader</span><span class="p">()</span>
+<span class="n">tag</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="n">readFileNamed</span><span class="p">(</span><span class="s1">&#39;foo.html&#39;</span><span class="p">)</span>
+<span class="n">tag</span><span class="o">.</span><span class="n">pprint</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Tags have attributes and children, which makes them hierarchical.
+See HTMLTag class docs for more info.</p>
+<p>Note that you imported HTMLReader instead of HTMLTag.
+You only need the latter if you plan on creating tags directly.</p>
+<p>You can discard the reader immediately if you like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tag</span> <span class="o">=</span> <span class="n">HTMLReader</span><span class="p">()</span><span class="o">.</span><span class="n">readFileNamed</span><span class="p">(</span><span class="s1">&#39;foo.html&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The point of reading HTML into tag objects is so that you have a concrete,
+Pythonic data structure to work with. The original motivation for such a
+beast was in building automated regression test suites that wanted granular,
+structured access to the HTML output by the web application.</p>
+<p>See the doc string for HTMLTag for examples of what you can do with tags.</p>
+<dl class="py exception">
+<dt id="WebUtils.HTMLTag.HTMLNotAllowedError">
+<em class="property">exception </em><code class="sig-prename descclassname">WebUtils.HTMLTag.</code><code class="sig-name descname">HTMLNotAllowedError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">values</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLNotAllowedError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#WebUtils.HTMLTag.HTMLTagError" title="WebUtils.HTMLTag.HTMLTagError"><code class="xref py py-class docutils literal notranslate"><span class="pre">WebUtils.HTMLTag.HTMLTagError</span></code></a></p>
+<p>HTML tag not allowed here error</p>
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLNotAllowedError.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">values</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLNotAllowedError.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="WebUtils.HTMLTag.HTMLNotAllowedError.args">
+<code class="sig-name descname">args</code><a class="headerlink" href="#WebUtils.HTMLTag.HTMLNotAllowedError.args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLNotAllowedError.with_traceback">
+<code class="sig-name descname">with_traceback</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLNotAllowedError.with_traceback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="WebUtils.HTMLTag.HTMLReader">
+<em class="property">class </em><code class="sig-prename descclassname">WebUtils.HTMLTag.</code><code class="sig-name descname">HTMLReader</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">emptyTags</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">extraEmptyTags</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">fakeRootTagIfNeeded</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">html.parser.HTMLParser</span></code></p>
+<p>Reader class for representing HTML as tag objects.</p>
+<p>NOTES</p>
+<ul class="simple">
+<li><p>Special attention is required regarding tags like <code class="docutils literal notranslate"><span class="pre">&lt;p&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;li&gt;</span></code>
+which sometimes are closed and sometimes not. HTMLReader can deal with
+both situations (closed and not) provided that:</p>
+<ul>
+<li><p>the file doesn’t change conventions for a given tag</p></li>
+<li><p>the reader knows ahead of time what to expect</p></li>
+</ul>
+</li>
+</ul>
+<p>Be default, <cite>HTMLReader</cite> assumes that <code class="docutils literal notranslate"><span class="pre">&lt;p&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;li&gt;</span></code> will be closed
+with <code class="docutils literal notranslate"><span class="pre">&lt;/p&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;/li&gt;</span></code> as the official HTML spec encourages.</p>
+<p>But if your files don’t close certain tags that are supposed to be
+required, you can do this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">HTMLReader</span><span class="p">(</span><span class="n">extraEmptyTags</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="s1">&#39;li&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>or:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">reader</span><span class="o">.</span><span class="n">extendEmptyTags</span><span class="p">([</span><span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="s1">&#39;li&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>or just set them entirely:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">HTMLReader</span><span class="p">(</span><span class="n">emptyTags</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;br&#39;</span><span class="p">,</span> <span class="s1">&#39;hr&#39;</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">])</span>
+<span class="n">reader</span><span class="o">.</span><span class="n">setEmptyTags</span><span class="p">([</span><span class="s1">&#39;br&#39;</span><span class="p">,</span> <span class="s1">&#39;hr&#39;</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Although there are quite a few. Consider the DefaultEmptyTags global
+list (which is used to initialize the reader’s tags) which contains
+about 16 tag names.</p>
+<p>If an HTML file doesn’t conform to the reader’s expectation, you will get
+an exception (see more below for details).</p>
+<p>If your HTML file doesn’t contain root <code class="docutils literal notranslate"><span class="pre">&lt;html&gt;</span> <span class="pre">...</span> <span class="pre">&lt;/html&gt;</span></code> tags wrapping
+everything, a fake root tag will be constructed for you, unless you pass
+in fakeRootTagIfNeeded=False.</p>
+<p>Besides fixing your reader manually, you could conceivably loop through
+the permutations of the various empty tags to see if one of them resulted
+in a correct read.</p>
+<p>Or you could fix the HTML.</p>
+<blockquote>
+<div><ul>
+<li><p>The reader ignores extra preceding and trailing whitespace by stripping
+it from strings. I suppose this is a little harsher than reducing spans
+of preceding and trailing whitespace down to one space, which is what
+really happens in an HTML browser.</p></li>
+<li><p>The reader will not read past the closing <code class="docutils literal notranslate"><span class="pre">&lt;/html&gt;</span></code> tag.</p></li>
+<li><p>The reader is picky about the correctness of the HTML you feed it.
+If tags are not closed, overlap (instead of nest) or left unfinished,
+an exception is thrown. These include <cite>HTMLTagUnbalancedError</cite>,
+<cite>HTMLTagIncompleteError</cite> and <cite>HTMLNotAllowedError</cite> which all inherit
+<cite>HTMLTagError</cite>.</p>
+<p>This pickiness can be quite useful for the validation of the HTML of
+your own applications.</p>
+</li>
+</ul>
+</div></blockquote>
+<dl class="py attribute">
+<dt id="WebUtils.HTMLTag.HTMLReader.CDATA_CONTENT_ELEMENTS">
+<code class="sig-name descname">CDATA_CONTENT_ELEMENTS</code><em class="property"> = ('script', 'style')</em><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.CDATA_CONTENT_ELEMENTS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">emptyTags</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">extraEmptyTags</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">fakeRootTagIfNeeded</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize and reset this instance.</p>
+<p>If convert_charrefs is True (the default), all character references
+are automatically converted to the corresponding Unicode characters.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.check_for_whole_start_tag">
+<code class="sig-name descname">check_for_whole_start_tag</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">i</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.check_for_whole_start_tag" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.clear_cdata_mode">
+<code class="sig-name descname">clear_cdata_mode</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.clear_cdata_mode" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.close">
+<code class="sig-name descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle any buffered data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.computeTagContainmentConfig">
+<code class="sig-name descname">computeTagContainmentConfig</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.computeTagContainmentConfig" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.emptyTags">
+<code class="sig-name descname">emptyTags</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.emptyTags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of empty tags.</p>
+<p>See also: class docs and setEmptyTags().</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.error">
+<code class="sig-name descname">error</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">message</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.error" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.extendEmptyTags">
+<code class="sig-name descname">extendEmptyTags</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tagList</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.extendEmptyTags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extend the current list of empty tags with the given list.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.feed">
+<code class="sig-name descname">feed</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.feed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Feed data to the parser.</p>
+<p>Call this as often as you want, with as little or as much text
+as you want (may include ‘n’).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.filename">
+<code class="sig-name descname">filename</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the name of the file if one has been read, otherwise None.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.get_starttag_text">
+<code class="sig-name descname">get_starttag_text</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.get_starttag_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return full source of start tag: ‘&lt;…&gt;’.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.getpos">
+<code class="sig-name descname">getpos</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.getpos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return current line number and offset.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.goahead">
+<code class="sig-name descname">goahead</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">end</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.goahead" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.handle_charref">
+<code class="sig-name descname">handle_charref</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.handle_charref" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.handle_comment">
+<code class="sig-name descname">handle_comment</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.handle_comment" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.handle_data">
+<code class="sig-name descname">handle_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.handle_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.handle_decl">
+<code class="sig-name descname">handle_decl</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">decl</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.handle_decl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.handle_endtag">
+<code class="sig-name descname">handle_endtag</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.handle_endtag" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.handle_entityref">
+<code class="sig-name descname">handle_entityref</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.handle_entityref" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.handle_pi">
+<code class="sig-name descname">handle_pi</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.handle_pi" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.handle_startendtag">
+<code class="sig-name descname">handle_startendtag</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tag</span></em>, <em class="sig-param"><span class="n">attrs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.handle_startendtag" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.handle_starttag">
+<code class="sig-name descname">handle_starttag</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">attrs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.handle_starttag" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.main">
+<code class="sig-name descname">main</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">args</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>The command line equivalent of readFileNamed().</p>
+<p>Invoked when HTMLTag is run as a program.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.parse_bogus_comment">
+<code class="sig-name descname">parse_bogus_comment</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">i</span></em>, <em class="sig-param"><span class="n">report</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.parse_bogus_comment" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.parse_comment">
+<code class="sig-name descname">parse_comment</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">i</span></em>, <em class="sig-param"><span class="n">report</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.parse_comment" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.parse_declaration">
+<code class="sig-name descname">parse_declaration</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">i</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.parse_declaration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.parse_endtag">
+<code class="sig-name descname">parse_endtag</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">i</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.parse_endtag" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.parse_html_declaration">
+<code class="sig-name descname">parse_html_declaration</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">i</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.parse_html_declaration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.parse_marked_section">
+<code class="sig-name descname">parse_marked_section</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">i</span></em>, <em class="sig-param"><span class="n">report</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.parse_marked_section" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.parse_pi">
+<code class="sig-name descname">parse_pi</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">i</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.parse_pi" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.parse_starttag">
+<code class="sig-name descname">parse_starttag</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">i</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.parse_starttag" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.pprint">
+<code class="sig-name descname">pprint</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">out</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.pprint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pretty prints the tag, its attributes and all its children.</p>
+<p>Indentation is used for subtags.
+Print ‘Empty.’ if there is no root tag.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.printsStack">
+<code class="sig-name descname">printsStack</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.printsStack" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.readFileNamed">
+<code class="sig-name descname">readFileNamed</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">retainRootTag</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.readFileNamed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the given file.</p>
+<p>Relies on readString(). See that method for more information.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.readString">
+<code class="sig-name descname">readString</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">string</span></em>, <em class="sig-param"><span class="n">retainRootTag</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.readString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the given string, store the results and return the root tag.</p>
+<p>You could continue to use HTMLReader object or disregard it and simply
+use the root tag.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.reset">
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset this instance.  Loses all unprocessed data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.rootTag">
+<code class="sig-name descname">rootTag</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.rootTag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the root tag.</p>
+<p>May return None if no HTML has been read yet, or if the last
+invocation of one of the read methods was passed retainRootTag=False.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.setEmptyTags">
+<code class="sig-name descname">setEmptyTags</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tagList</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.setEmptyTags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the HTML tags that are considered empty such as &lt;br&gt; and &lt;hr&gt;.</p>
+<p>The default is found in the global, DefaultEmptyTags, and is fairly
+thorough, but does not include &lt;p&gt;, &lt;li&gt; and some other tags that
+HTML authors often use as empty tags.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.setPrintsStack">
+<code class="sig-name descname">setPrintsStack</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flag</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.setPrintsStack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the boolean value of the “prints stack” option.</p>
+<p>This is a debugging option which will print the internal tag stack
+during HTML processing. The default value is False.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.set_cdata_mode">
+<code class="sig-name descname">set_cdata_mode</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">elem</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.set_cdata_mode" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="WebUtils.HTMLTag.HTMLReader.tagContainmentConfig">
+<code class="sig-name descname">tagContainmentConfig</code><em class="property"> = {'body': 'cannotHave  html head body', 'head': 'cannotHave  html head body', 'html': 'canOnlyHave head body', 'select': 'canOnlyHave option', 'table': 'canOnlyHave tr thead tbody tfoot a', 'td': 'cannotHave  td tr', 'tr': 'canOnlyHave th td'}</em><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.tagContainmentConfig" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.unescape">
+<code class="sig-name descname">unescape</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.unescape" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.unknown_decl">
+<code class="sig-name descname">unknown_decl</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.unknown_decl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.updatepos">
+<code class="sig-name descname">updatepos</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">i</span></em>, <em class="sig-param"><span class="n">j</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.updatepos" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLReader.usage">
+<code class="sig-name descname">usage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLReader.usage" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="WebUtils.HTMLTag.HTMLTag">
+<em class="property">class </em><code class="sig-prename descclassname">WebUtils.HTMLTag.</code><code class="sig-name descname">HTMLTag</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">lineNumber</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Container class for representing HTML as tag objects.</p>
+<p>Tags essentially have 4 major attributes:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>name</p></li>
+<li><p>attributes</p></li>
+<li><p>children</p></li>
+<li><p>subtags</p></li>
+</ul>
+</div></blockquote>
+<dl class="simple">
+<dt>Name is simple:</dt><dd><p>print(tag.name())</p>
+</dd>
+</dl>
+<p>Attributes are dictionary-like in nature:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">tag</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;color&#39;</span><span class="p">))</span>  <span class="c1"># throws an exception if no color</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tag</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;bgcolor&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>  <span class="c1"># returns None if no bgcolor</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tag</span><span class="o">.</span><span class="n">attrs</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>Children are all the leaf parts of a tag, consisting of other tags
+and strings of character data:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">tag</span><span class="o">.</span><span class="n">numChildren</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tag</span><span class="o">.</span><span class="n">childAt</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tag</span><span class="o">.</span><span class="n">children</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>Subtags is a convenient list of only the tags in the children:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">tag</span><span class="o">.</span><span class="n">numSubtags</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tag</span><span class="o">.</span><span class="n">subtagAt</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tag</span><span class="o">.</span><span class="n">subtags</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>You can search a tag and all the tags it contains for a tag with
+a particular attribute matching a particular value:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">tag</span><span class="o">.</span><span class="n">tagWithMatchingAttr</span><span class="p">(</span><span class="s1">&#39;width&#39;</span><span class="p">,</span> <span class="s1">&#39;100%&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>An HTMLTagAttrLookupError is raised if no matching tag is found.
+You can avoid this by providing a default value:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">tag</span><span class="o">.</span><span class="n">tagWithMatchingAttr</span><span class="p">(</span><span class="s1">&#39;width&#39;</span><span class="p">,</span> <span class="s1">&#39;100%&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Looking for specific ‘id’ attributes is common in regression testing
+(it allows you to zero in on logical portions of a page),
+so a convenience method is provided:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tag</span> <span class="o">=</span> <span class="n">htmlTag</span><span class="o">.</span><span class="n">tagWithId</span><span class="p">(</span><span class="s1">&#39;accountTable&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLTag.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">lineNumber</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTag.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLTag.addChild">
+<code class="sig-name descname">addChild</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">child</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTag.addChild" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a child to the receiver.</p>
+<p>The child will be another tag or a string (CDATA).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLTag.attr">
+<code class="sig-name descname">attr</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">default=&lt;class 'MiscUtils.NoDefault'&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTag.attr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLTag.attrs">
+<code class="sig-name descname">attrs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTag.attrs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLTag.childAt">
+<code class="sig-name descname">childAt</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTag.childAt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLTag.children">
+<code class="sig-name descname">children</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTag.children" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLTag.closedBy">
+<code class="sig-name descname">closedBy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">lineNumber</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTag.closedBy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLTag.hasAttr">
+<code class="sig-name descname">hasAttr</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTag.hasAttr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLTag.name">
+<code class="sig-name descname">name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTag.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLTag.numAttrs">
+<code class="sig-name descname">numAttrs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTag.numAttrs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLTag.numChildren">
+<code class="sig-name descname">numChildren</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTag.numChildren" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLTag.numSubtags">
+<code class="sig-name descname">numSubtags</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTag.numSubtags" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLTag.pprint">
+<code class="sig-name descname">pprint</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">out</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">indent</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTag.pprint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLTag.readAttr">
+<code class="sig-name descname">readAttr</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTag.readAttr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set an attribute of the tag with the given name and value.</p>
+<p>A HTMLTagAttrLookupError is raised if an attribute is set twice.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLTag.subtagAt">
+<code class="sig-name descname">subtagAt</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTag.subtagAt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLTag.subtags">
+<code class="sig-name descname">subtags</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTag.subtags" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLTag.tagWithId">
+<code class="sig-name descname">tagWithId</code><span class="sig-paren">(</span><em class="sig-param">id_</em>, <em class="sig-param">default=&lt;class 'MiscUtils.NoDefault'&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTag.tagWithId" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search for tag with a given id.</p>
+<p>Finds and returns the tag with the given id. As in:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">td</span> <span class="nb">id</span><span class="o">=</span><span class="n">foo</span><span class="o">&gt;</span> <span class="n">bar</span> <span class="o">&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>This is just a cover for:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tagWithMatchingAttr</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">id_</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>But searching for id’s is so popular (at least in regression testing
+web sites) that this convenience method is provided.
+Why is it so popular? Because by attaching ids to logical portions
+of your HTML, your regression test suite can quickly zero in on them
+for examination.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLTag.tagWithMatchingAttr">
+<code class="sig-name descname">tagWithMatchingAttr</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">value</em>, <em class="sig-param">default=&lt;class 'MiscUtils.NoDefault'&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTag.tagWithMatchingAttr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search for tag with matching attributes.</p>
+<p>Performs a depth-first search for a tag with an attribute that matches
+the given value. If the tag cannot be found, a KeyError will be raised
+<em>unless</em> a default value was specified, which is then returned.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tag</span> <span class="o">=</span> <span class="n">tag</span><span class="o">.</span><span class="n">tagWithMatchingAttr</span><span class="p">(</span><span class="s1">&#39;bgcolor&#39;</span><span class="p">,</span> <span class="s1">&#39;#FFFFFF&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt id="WebUtils.HTMLTag.HTMLTagAttrLookupError">
+<em class="property">exception </em><code class="sig-prename descclassname">WebUtils.HTMLTag.</code><code class="sig-name descname">HTMLTagAttrLookupError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">values</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTagAttrLookupError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#WebUtils.HTMLTag.HTMLTagError" title="WebUtils.HTMLTag.HTMLTagError"><code class="xref py py-class docutils literal notranslate"><span class="pre">WebUtils.HTMLTag.HTMLTagError</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">LookupError</span></code></p>
+<p>HTML tag attribute lookup error</p>
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLTagAttrLookupError.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">values</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTagAttrLookupError.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="WebUtils.HTMLTag.HTMLTagAttrLookupError.args">
+<code class="sig-name descname">args</code><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTagAttrLookupError.args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLTagAttrLookupError.with_traceback">
+<code class="sig-name descname">with_traceback</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTagAttrLookupError.with_traceback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt id="WebUtils.HTMLTag.HTMLTagError">
+<em class="property">exception </em><code class="sig-prename descclassname">WebUtils.HTMLTag.</code><code class="sig-name descname">HTMLTagError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">values</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTagError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>General HTML tag error</p>
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLTagError.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">values</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTagError.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="WebUtils.HTMLTag.HTMLTagError.args">
+<code class="sig-name descname">args</code><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTagError.args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLTagError.with_traceback">
+<code class="sig-name descname">with_traceback</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTagError.with_traceback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt id="WebUtils.HTMLTag.HTMLTagIncompleteError">
+<em class="property">exception </em><code class="sig-prename descclassname">WebUtils.HTMLTag.</code><code class="sig-name descname">HTMLTagIncompleteError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">values</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTagIncompleteError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#WebUtils.HTMLTag.HTMLTagError" title="WebUtils.HTMLTag.HTMLTagError"><code class="xref py py-class docutils literal notranslate"><span class="pre">WebUtils.HTMLTag.HTMLTagError</span></code></a></p>
+<p>HTML tag incomplete error</p>
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLTagIncompleteError.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">values</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTagIncompleteError.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="WebUtils.HTMLTag.HTMLTagIncompleteError.args">
+<code class="sig-name descname">args</code><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTagIncompleteError.args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLTagIncompleteError.with_traceback">
+<code class="sig-name descname">with_traceback</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTagIncompleteError.with_traceback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt id="WebUtils.HTMLTag.HTMLTagProcessingInstructionError">
+<em class="property">exception </em><code class="sig-prename descclassname">WebUtils.HTMLTag.</code><code class="sig-name descname">HTMLTagProcessingInstructionError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">values</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTagProcessingInstructionError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#WebUtils.HTMLTag.HTMLTagError" title="WebUtils.HTMLTag.HTMLTagError"><code class="xref py py-class docutils literal notranslate"><span class="pre">WebUtils.HTMLTag.HTMLTagError</span></code></a></p>
+<p>HTML tag processing instruction error</p>
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLTagProcessingInstructionError.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">values</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTagProcessingInstructionError.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="WebUtils.HTMLTag.HTMLTagProcessingInstructionError.args">
+<code class="sig-name descname">args</code><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTagProcessingInstructionError.args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLTagProcessingInstructionError.with_traceback">
+<code class="sig-name descname">with_traceback</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTagProcessingInstructionError.with_traceback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt id="WebUtils.HTMLTag.HTMLTagUnbalancedError">
+<em class="property">exception </em><code class="sig-prename descclassname">WebUtils.HTMLTag.</code><code class="sig-name descname">HTMLTagUnbalancedError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">values</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTagUnbalancedError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#WebUtils.HTMLTag.HTMLTagError" title="WebUtils.HTMLTag.HTMLTagError"><code class="xref py py-class docutils literal notranslate"><span class="pre">WebUtils.HTMLTag.HTMLTagError</span></code></a></p>
+<p>Unbalanced HTML tag error</p>
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLTagUnbalancedError.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">msg</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">values</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTagUnbalancedError.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="WebUtils.HTMLTag.HTMLTagUnbalancedError.args">
+<code class="sig-name descname">args</code><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTagUnbalancedError.args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.HTMLTagUnbalancedError.with_traceback">
+<code class="sig-name descname">with_traceback</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.HTMLTagUnbalancedError.with_traceback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="WebUtils.HTMLTag.TagCanOnlyHaveConfig">
+<em class="property">class </em><code class="sig-prename descclassname">WebUtils.HTMLTag.</code><code class="sig-name descname">TagCanOnlyHaveConfig</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">tags</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.TagCanOnlyHaveConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#WebUtils.HTMLTag.TagConfig" title="WebUtils.HTMLTag.TagConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">WebUtils.HTMLTag.TagConfig</span></code></a></p>
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.TagCanOnlyHaveConfig.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">tags</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.TagCanOnlyHaveConfig.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.TagCanOnlyHaveConfig.encounteredTag">
+<code class="sig-name descname">encounteredTag</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tag</span></em>, <em class="sig-param"><span class="n">lineNum</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.TagCanOnlyHaveConfig.encounteredTag" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="WebUtils.HTMLTag.TagCannotHaveConfig">
+<em class="property">class </em><code class="sig-prename descclassname">WebUtils.HTMLTag.</code><code class="sig-name descname">TagCannotHaveConfig</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">tags</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.TagCannotHaveConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#WebUtils.HTMLTag.TagConfig" title="WebUtils.HTMLTag.TagConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">WebUtils.HTMLTag.TagConfig</span></code></a></p>
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.TagCannotHaveConfig.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">tags</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.TagCannotHaveConfig.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.TagCannotHaveConfig.encounteredTag">
+<code class="sig-name descname">encounteredTag</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tag</span></em>, <em class="sig-param"><span class="n">lineNum</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.TagCannotHaveConfig.encounteredTag" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="WebUtils.HTMLTag.TagConfig">
+<em class="property">class </em><code class="sig-prename descclassname">WebUtils.HTMLTag.</code><code class="sig-name descname">TagConfig</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">tags</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.TagConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.TagConfig.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">tags</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.TagConfig.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.HTMLTag.TagConfig.encounteredTag">
+<code class="sig-name descname">encounteredTag</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tag</span></em>, <em class="sig-param"><span class="n">lineNum</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.HTMLTag.TagConfig.encounteredTag" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Webware for Python 3</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changes.html">List of Changes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migrate.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../copyright.html">Copyright and License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Beginner Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appdev.html">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../config.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deploy.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">Plug-ins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../style.html">Style Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../psp.html">PSP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../userkit.html">UserKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskkit.html">TaskKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../webutils.html">WebUtils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../miscutils.html">MiscUtils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../core/index.html">Core Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../psp/index.html">PSP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../userkit/index.html">UserKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../taskkit/index.html">TaskKit</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">WebUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscutils/index.html">MiscUtils</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">API Reference</a><ul>
+  <li><a href="index.html">WebUtils</a><ul>
+      <li>Previous: <a href="htmlforexception.html" title="previous chapter">HTMLForException</a></li>
+      <li>Next: <a href="httpstatuscodes.html" title="next chapter">HTTPStatusCodes</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;1999-2021, Christoph Zwerschke et al.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/ref/webutils/htmltag.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,236 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User &#8212; Webware for Python 3 3.0.2 documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="UserManager" href="usermanager.html" />
+    <link rel="prev" title="RoleUserManagerToFile" href="roleusermanagertofile.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-UserKit.User">
+<span id="user"></span><h1>User<a class="headerlink" href="#module-UserKit.User" title="Permalink to this headline">¶</a></h1>
+<p>The basic User class.</p>
+<dl class="py class">
+<dt id="UserKit.User.User">
+<em class="property">class </em><code class="sig-prename descclassname">UserKit.User.</code><code class="sig-name descname">User</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">manager</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">password</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.User.User" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The base class for a UserKit User.</p>
+<dl class="py method">
+<dt id="UserKit.User.User.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">manager</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">password</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.User.User.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="UserKit.User.User.creationTime">
+<code class="sig-name descname">creationTime</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.User.User.creationTime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="UserKit.User.User.externalId">
+<code class="sig-name descname">externalId</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.User.User.externalId" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="UserKit.User.User.isActive">
+<code class="sig-name descname">isActive</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.User.User.isActive" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="UserKit.User.User.lastAccessTime">
+<code class="sig-name descname">lastAccessTime</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.User.User.lastAccessTime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="UserKit.User.User.lastLoginTime">
+<code class="sig-name descname">lastLoginTime</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.User.User.lastLoginTime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="UserKit.User.User.login">
+<code class="sig-name descname">login</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">password</span></em>, <em class="sig-param"><span class="n">fromMgr</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.User.User.login" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return self if the login is successful and None otherwise.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="UserKit.User.User.logout">
+<code class="sig-name descname">logout</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fromMgr</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.User.User.logout" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="UserKit.User.User.manager">
+<code class="sig-name descname">manager</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.User.User.manager" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="UserKit.User.User.name">
+<code class="sig-name descname">name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.User.User.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="UserKit.User.User.password">
+<code class="sig-name descname">password</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.User.User.password" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="UserKit.User.User.serialNum">
+<code class="sig-name descname">serialNum</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.User.User.serialNum" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="UserKit.User.User.setManager">
+<code class="sig-name descname">setManager</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">manager</span></em><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.User.User.setManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the manager, which can only be done once.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="UserKit.User.User.setName">
+<code class="sig-name descname">setName</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.User.User.setName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the name, which can only be done once.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="UserKit.User.User.setPassword">
+<code class="sig-name descname">setPassword</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">password</span></em><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.User.User.setPassword" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="UserKit.User.User.setSerialNum">
+<code class="sig-name descname">setSerialNum</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">serialNum</span></em><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.User.User.setSerialNum" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="UserKit.User.User.wasAccessed">
+<code class="sig-name descname">wasAccessed</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#UserKit.User.User.wasAccessed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Webware for Python 3</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changes.html">List of Changes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migrate.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../copyright.html">Copyright and License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Beginner Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appdev.html">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../config.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deploy.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">Plug-ins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../style.html">Style Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../psp.html">PSP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../userkit.html">UserKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskkit.html">TaskKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../webutils.html">WebUtils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../miscutils.html">MiscUtils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../core/index.html">Core Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../psp/index.html">PSP</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">UserKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../taskkit/index.html">TaskKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../webutils/index.html">WebUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscutils/index.html">MiscUtils</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">API Reference</a><ul>
+  <li><a href="index.html">UserKit</a><ul>
+      <li>Previous: <a href="roleusermanagertofile.html" title="previous chapter">RoleUserManagerToFile</a></li>
+      <li>Next: <a href="usermanager.html" title="next chapter">UserManager</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;1999-2021, Christoph Zwerschke et al.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/ref/userkit/user.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

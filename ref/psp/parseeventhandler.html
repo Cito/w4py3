@@ -1,0 +1,403 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ParseEventHandler &#8212; Webware for Python 3 3.0.2 documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="PSPCompiler" href="pspcompiler.html" />
+    <link rel="prev" title="Generators" href="generators.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-PSP.ParseEventHandler">
+<span id="parseeventhandler"></span><h1>ParseEventHandler<a class="headerlink" href="#module-PSP.ParseEventHandler" title="Permalink to this headline">¶</a></h1>
+<p>Event handler for parsing PSP tokens.</p>
+<p>This module is called when the Parser encounters psp tokens.
+It creates a generator to handle the PSP token. When the PSP
+source file is fully parsed, this module calls all of the
+generators in turn to output their source code.</p>
+<p>Copyright (c) by Jay Love, 2000 (<a class="reference external" href="mailto:jsliv&#37;&#52;&#48;jslove&#46;org">mailto:jsliv<span>&#64;</span>jslove<span>&#46;</span>org</a>)</p>
+<p>Permission to use, copy, modify, and distribute this software and its
+documentation for any purpose and without fee or royalty is hereby granted,
+provided that the above copyright notice appear in all copies and that
+both that copyright notice and this permission notice appear in
+supporting documentation or portions thereof, including modifications,
+that you make.</p>
+<p>This software is based in part on work done by the Jakarta group.</p>
+<dl class="py class">
+<dt id="PSP.ParseEventHandler.ParseEventHandler">
+<em class="property">class </em><code class="sig-prename descclassname">PSP.ParseEventHandler.</code><code class="sig-name descname">ParseEventHandler</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ctxt</span></em>, <em class="sig-param"><span class="n">parser</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ParseEventHandler.ParseEventHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This is a key class.</p>
+<p>It implements the handling of all the parsing elements.
+Note: This files JSP cousin is called ParseEventListener,
+I don’t know why, but Handler seemed more appropriate to me.</p>
+<dl class="py method">
+<dt id="PSP.ParseEventHandler.ParseEventHandler.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ctxt</span></em>, <em class="sig-param"><span class="n">parser</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ParseEventHandler.ParseEventHandler.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ParseEventHandler.ParseEventHandler.addGenerator">
+<code class="sig-name descname">addGenerator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">gen</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ParseEventHandler.ParseEventHandler.addGenerator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="PSP.ParseEventHandler.ParseEventHandler.aspace">
+<code class="sig-name descname">aspace</code><em class="property"> = ' '</em><a class="headerlink" href="#PSP.ParseEventHandler.ParseEventHandler.aspace" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ParseEventHandler.ParseEventHandler.beginProcessing">
+<code class="sig-name descname">beginProcessing</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ParseEventHandler.ParseEventHandler.beginProcessing" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="PSP.ParseEventHandler.ParseEventHandler.defaults">
+<code class="sig-name descname">defaults</code><em class="property"> = {'BASE_CLASS': 'Page', 'BASE_METHOD': 'writeHTML', 'formatter': 'str', 'gobbleWhitespace': True, 'imports': {'filename': 'classes'}, 'indent': 4, 'instanceSafe': 'yes', 'threadSafe': 'no'}</em><a class="headerlink" href="#PSP.ParseEventHandler.ParseEventHandler.defaults" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="PSP.ParseEventHandler.ParseEventHandler.directiveHandlers">
+<code class="sig-name descname">directiveHandlers</code><em class="property"> = {'BaseClass': &lt;function ParseEventHandler.extendsHandler&gt;, 'extends': &lt;function ParseEventHandler.extendsHandler&gt;, 'formatter': &lt;function ParseEventHandler.formatterHandler&gt;, 'gobbleWhitespace': &lt;function ParseEventHandler.gobbleWhitespaceHandler&gt;, 'import': &lt;function ParseEventHandler.importHandler&gt;, 'imports': &lt;function ParseEventHandler.importHandler&gt;, 'indentSpaces': &lt;function ParseEventHandler.indentSpacesHandler&gt;, 'indentType': &lt;function ParseEventHandler.indentTypeHandler&gt;, 'isInstanceSafe': &lt;function ParseEventHandler.instanceSafeHandler&gt;, 'isThreadSafe': &lt;function ParseEventHandler.threadSafeHandler&gt;, 'method': &lt;function ParseEventHandler.mainMethodHandler&gt;}</em><a class="headerlink" href="#PSP.ParseEventHandler.ParseEventHandler.directiveHandlers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ParseEventHandler.ParseEventHandler.endProcessing">
+<code class="sig-name descname">endProcessing</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ParseEventHandler.ParseEventHandler.endProcessing" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ParseEventHandler.ParseEventHandler.extendsHandler">
+<code class="sig-name descname">extendsHandler</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bases</span></em>, <em class="sig-param"><span class="n">start</span></em>, <em class="sig-param"><span class="n">stop</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ParseEventHandler.ParseEventHandler.extendsHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extends is a page directive.</p>
+<p>It sets the base class (or multiple base classes) for the class
+that this class will generate. The choice of base class affects
+the choice of a method to override with the BaseMethod page directive.
+The default base class is PSPPage. PSPPage inherits from Page.py.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ParseEventHandler.ParseEventHandler.formatterHandler">
+<code class="sig-name descname">formatterHandler</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">start</span></em>, <em class="sig-param"><span class="n">stop</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ParseEventHandler.ParseEventHandler.formatterHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set an alternate formatter function to use instead of str().</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ParseEventHandler.ParseEventHandler.generateAll">
+<code class="sig-name descname">generateAll</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">phase</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ParseEventHandler.ParseEventHandler.generateAll" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ParseEventHandler.ParseEventHandler.generateDeclarations">
+<code class="sig-name descname">generateDeclarations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ParseEventHandler.ParseEventHandler.generateDeclarations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ParseEventHandler.ParseEventHandler.generateFooter">
+<code class="sig-name descname">generateFooter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ParseEventHandler.ParseEventHandler.generateFooter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ParseEventHandler.ParseEventHandler.generateHeader">
+<code class="sig-name descname">generateHeader</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ParseEventHandler.ParseEventHandler.generateHeader" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ParseEventHandler.ParseEventHandler.generateInitPSP">
+<code class="sig-name descname">generateInitPSP</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ParseEventHandler.ParseEventHandler.generateInitPSP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ParseEventHandler.ParseEventHandler.generateMainMethod">
+<code class="sig-name descname">generateMainMethod</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ParseEventHandler.ParseEventHandler.generateMainMethod" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ParseEventHandler.ParseEventHandler.gobbleWhitespace">
+<code class="sig-name descname">gobbleWhitespace</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ParseEventHandler.ParseEventHandler.gobbleWhitespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gobble up whitespace.</p>
+<p>This method looks for a character block between two PSP blocks
+that contains only whitespace. If it finds one, it deletes it.</p>
+<p>This is necessary so that a write() line can’t sneek in between
+a if/else, try/except etc.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ParseEventHandler.ParseEventHandler.gobbleWhitespaceHandler">
+<code class="sig-name descname">gobbleWhitespaceHandler</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">start</span></em>, <em class="sig-param"><span class="n">stop</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ParseEventHandler.ParseEventHandler.gobbleWhitespaceHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Declare whether whitespace between script tags are gobble up.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ParseEventHandler.ParseEventHandler.handleCharData">
+<code class="sig-name descname">handleCharData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">start</span></em>, <em class="sig-param"><span class="n">stop</span></em>, <em class="sig-param"><span class="n">chars</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ParseEventHandler.ParseEventHandler.handleCharData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flush character data into a CharDataGenerator.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ParseEventHandler.ParseEventHandler.handleComment">
+<code class="sig-name descname">handleComment</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">start</span></em>, <em class="sig-param"><span class="n">stop</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ParseEventHandler.ParseEventHandler.handleComment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Comments get swallowed into nothing.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ParseEventHandler.ParseEventHandler.handleDirective">
+<code class="sig-name descname">handleDirective</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">directive</span></em>, <em class="sig-param"><span class="n">start</span></em>, <em class="sig-param"><span class="n">stop</span></em>, <em class="sig-param"><span class="n">attrs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ParseEventHandler.ParseEventHandler.handleDirective" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flush any template data and create a new DirectiveGenerator.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ParseEventHandler.ParseEventHandler.handleEndBlock">
+<code class="sig-name descname">handleEndBlock</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ParseEventHandler.ParseEventHandler.handleEndBlock" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ParseEventHandler.ParseEventHandler.handleExpression">
+<code class="sig-name descname">handleExpression</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">start</span></em>, <em class="sig-param"><span class="n">stop</span></em>, <em class="sig-param"><span class="n">attrs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ParseEventHandler.ParseEventHandler.handleExpression" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flush any template data and create a new ExpressionGenerator.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ParseEventHandler.ParseEventHandler.handleInclude">
+<code class="sig-name descname">handleInclude</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">attrs</span></em>, <em class="sig-param"><span class="n">param</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ParseEventHandler.ParseEventHandler.handleInclude" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is for includes of the form &lt;psp:include …&gt;</p>
+<p>This function essentially forwards the request to the specified
+URL and includes that output.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ParseEventHandler.ParseEventHandler.handleInsert">
+<code class="sig-name descname">handleInsert</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">attrs</span></em>, <em class="sig-param"><span class="n">param</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ParseEventHandler.ParseEventHandler.handleInsert" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is for includes of the form &lt;psp:insert …&gt;</p>
+<p>This type of include is not parsed, it is just inserted into the
+output stream.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ParseEventHandler.ParseEventHandler.handleMethod">
+<code class="sig-name descname">handleMethod</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">start</span></em>, <em class="sig-param"><span class="n">stop</span></em>, <em class="sig-param"><span class="n">attrs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ParseEventHandler.ParseEventHandler.handleMethod" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ParseEventHandler.ParseEventHandler.handleMethodEnd">
+<code class="sig-name descname">handleMethodEnd</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">start</span></em>, <em class="sig-param"><span class="n">stop</span></em>, <em class="sig-param"><span class="n">attrs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ParseEventHandler.ParseEventHandler.handleMethodEnd" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ParseEventHandler.ParseEventHandler.handleScript">
+<code class="sig-name descname">handleScript</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">start</span></em>, <em class="sig-param"><span class="n">stop</span></em>, <em class="sig-param"><span class="n">attrs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ParseEventHandler.ParseEventHandler.handleScript" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle scripting elements</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ParseEventHandler.ParseEventHandler.handleScriptClass">
+<code class="sig-name descname">handleScriptClass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">start</span></em>, <em class="sig-param"><span class="n">stop</span></em>, <em class="sig-param"><span class="n">attrs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ParseEventHandler.ParseEventHandler.handleScriptClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Python script that goes at the class level</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ParseEventHandler.ParseEventHandler.handleScriptFile">
+<code class="sig-name descname">handleScriptFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">start</span></em>, <em class="sig-param"><span class="n">stop</span></em>, <em class="sig-param"><span class="n">attrs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ParseEventHandler.ParseEventHandler.handleScriptFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Python script that goes at the file/module level</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ParseEventHandler.ParseEventHandler.importHandler">
+<code class="sig-name descname">importHandler</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">imports</span></em>, <em class="sig-param"><span class="n">start</span></em>, <em class="sig-param"><span class="n">stop</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ParseEventHandler.ParseEventHandler.importHandler" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ParseEventHandler.ParseEventHandler.indentSpacesHandler">
+<code class="sig-name descname">indentSpacesHandler</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">amount</span></em>, <em class="sig-param"><span class="n">start</span></em>, <em class="sig-param"><span class="n">stop</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ParseEventHandler.ParseEventHandler.indentSpacesHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set number of spaces used to indent in generated source.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ParseEventHandler.ParseEventHandler.indentTypeHandler">
+<code class="sig-name descname">indentTypeHandler</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">indentType</span></em>, <em class="sig-param"><span class="n">start</span></em>, <em class="sig-param"><span class="n">stop</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ParseEventHandler.ParseEventHandler.indentTypeHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Declare whether tabs are used to indent source code.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ParseEventHandler.ParseEventHandler.instanceSafeHandler">
+<code class="sig-name descname">instanceSafeHandler</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">start</span></em>, <em class="sig-param"><span class="n">stop</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ParseEventHandler.ParseEventHandler.instanceSafeHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle isInstanceSafe.</p>
+<p>isInstanceSafe tells the Servlet engine whether it is safe
+to use object instances of this page multiple times.
+The default is “yes”.</p>
+<p>Saying “no” here hurts performance.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ParseEventHandler.ParseEventHandler.mainMethodHandler">
+<code class="sig-name descname">mainMethodHandler</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">method</span></em>, <em class="sig-param"><span class="n">start</span></em>, <em class="sig-param"><span class="n">stop</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ParseEventHandler.ParseEventHandler.mainMethodHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>BaseMethod is a page directive.</p>
+<p>It sets the class method that the main body of this PSP page
+over-rides. The default is WriteHTML. This value should be set
+to either WriteHTML or writeBody. See the PSPPage.py and Page.py
+servlet classes for more information.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ParseEventHandler.ParseEventHandler.optimizeCharData">
+<code class="sig-name descname">optimizeCharData</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ParseEventHandler.ParseEventHandler.optimizeCharData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optimize the CharData.</p>
+<p>Too many char data generators make the servlet slow.
+If the current Generator and the next are both CharData type,
+merge their data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ParseEventHandler.ParseEventHandler.setTemplateInfo">
+<code class="sig-name descname">setTemplateInfo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">start</span></em>, <em class="sig-param"><span class="n">stop</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ParseEventHandler.ParseEventHandler.setTemplateInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mark non code data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.ParseEventHandler.ParseEventHandler.threadSafeHandler">
+<code class="sig-name descname">threadSafeHandler</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">start</span></em>, <em class="sig-param"><span class="n">stop</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ParseEventHandler.ParseEventHandler.threadSafeHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle isThreadSage.</p>
+<p>isThreadSafe is a page directive.
+The value can be “yes” or “no”.
+Default is no because the default base class,
+Page.py, isn’t thread safe.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="PSP.ParseEventHandler.checkForTextHavingOnlyGivenChars">
+<code class="sig-prename descclassname">PSP.ParseEventHandler.</code><code class="sig-name descname">checkForTextHavingOnlyGivenChars</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">text</span></em>, <em class="sig-param"><span class="n">whitespace</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.ParseEventHandler.checkForTextHavingOnlyGivenChars" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether text contains only whitespace (or other chars).</p>
+<p>Does the given text contain anything other than the whitespace characters?
+Return true if text is only whitespace characters.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Webware for Python 3</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changes.html">List of Changes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migrate.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../copyright.html">Copyright and License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Beginner Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appdev.html">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../config.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deploy.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">Plug-ins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../style.html">Style Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../psp.html">PSP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../userkit.html">UserKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskkit.html">TaskKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../webutils.html">WebUtils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../miscutils.html">MiscUtils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../core/index.html">Core Classes</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">PSP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../userkit/index.html">UserKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../taskkit/index.html">TaskKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../webutils/index.html">WebUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscutils/index.html">MiscUtils</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">API Reference</a><ul>
+  <li><a href="index.html">PSP</a><ul>
+      <li>Previous: <a href="generators.html" title="previous chapter">Generators</a></li>
+      <li>Next: <a href="pspcompiler.html" title="next chapter">PSPCompiler</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;1999-2021, Christoph Zwerschke et al.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/ref/psp/parseeventhandler.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

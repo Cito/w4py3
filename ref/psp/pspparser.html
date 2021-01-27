@@ -1,0 +1,287 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PSPParser &#8212; Webware for Python 3 3.0.2 documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="PSPServletFactory" href="pspservletfactory.html" />
+    <link rel="prev" title="PSPPage" href="psppage.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-PSP.PSPParser">
+<span id="pspparser"></span><h1>PSPParser<a class="headerlink" href="#module-PSP.PSPParser" title="Permalink to this headline">¶</a></h1>
+<p>The PSP parser.</p>
+<p>This module handles the actual reading of the characters in the source
+PSP file and checking it for valid psp tokens. When it finds one,
+it calls ParseEventHandler with the characters it found.</p>
+<p>Copyright (c) by Jay Love, 2000 (<a class="reference external" href="mailto:jsliv&#37;&#52;&#48;jslove&#46;org">mailto:jsliv<span>&#64;</span>jslove<span>&#46;</span>org</a>)</p>
+<p>Permission to use, copy, modify, and distribute this software and its
+documentation for any purpose and without fee or royalty is hereby granted,
+provided that the above copyright notice appear in all copies and that
+both that copyright notice and this permission notice appear in
+supporting documentation or portions thereof, including modifications,
+that you make.</p>
+<p>This software is based in part on work done by the Jakarta group.</p>
+<dl class="py class">
+<dt id="PSP.PSPParser.PSPParser">
+<em class="property">class </em><code class="sig-prename descclassname">PSP.PSPParser.</code><code class="sig-name descname">PSPParser</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ctxt</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.PSPParser.PSPParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The main PSP parser class.</p>
+<p>The PSPParser class does the actual sniffing through the input file
+looking for anything we’re interested in. Basically, it starts by
+looking at the code looking for a ‘&lt;’ symbol. It looks at the code by
+working with a PSPReader object, which handles the current location in
+the code. When it finds one, it calls a list of checker methods,
+asking each if it recognizes the characters as its kind of input.
+When the checker methods look at the characters, if they want it,
+they go ahead and gobble it up and set up to create it in the servlet
+when the time comes. When they return, they return true if they accept
+the character, and the PSPReader object cursor is positioned past the
+end of the block that the checker method accepted.</p>
+<dl class="py method">
+<dt id="PSP.PSPParser.PSPParser.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ctxt</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.PSPParser.PSPParser.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.PSPParser.PSPParser.checkDirective">
+<code class="sig-name descname">checkDirective</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">handler</span></em>, <em class="sig-param"><span class="n">reader</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.PSPParser.PSPParser.checkDirective" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check for directives; for now we support only page and include.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.PSPParser.PSPParser.checkEndBlock">
+<code class="sig-name descname">checkEndBlock</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">handler</span></em>, <em class="sig-param"><span class="n">reader</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.PSPParser.PSPParser.checkEndBlock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check for the end of a block.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.PSPParser.PSPParser.checkExpression">
+<code class="sig-name descname">checkExpression</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">handler</span></em>, <em class="sig-param"><span class="n">reader</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.PSPParser.PSPParser.checkExpression" title="Permalink to this definition">¶</a></dt>
+<dd><p>Look for “expressions” and handle them.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.PSPParser.PSPParser.checkInclude">
+<code class="sig-name descname">checkInclude</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">handler</span></em>, <em class="sig-param"><span class="n">reader</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.PSPParser.PSPParser.checkInclude" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check for inserting another pages output in this spot.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.PSPParser.PSPParser.checkInsert">
+<code class="sig-name descname">checkInsert</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">handler</span></em>, <em class="sig-param"><span class="n">reader</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.PSPParser.PSPParser.checkInsert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check for straight character dumps.</p>
+<p>No big hurry for this. It’s almost the same as the page include
+directive.  This is only a partial implementation of what JSP does.
+JSP can pull it from another server, servlet, JSP page, etc.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.PSPParser.PSPParser.checkMethod">
+<code class="sig-name descname">checkMethod</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">handler</span></em>, <em class="sig-param"><span class="n">reader</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.PSPParser.PSPParser.checkMethod" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check for class methods defined in the page.</p>
+<p>We only support one format for these,
+<code class="docutils literal notranslate"><span class="pre">&lt;psp:method</span> <span class="pre">name=&quot;xxx&quot;</span> <span class="pre">params=&quot;xxx,xxx&quot;&gt;</span></code>
+Then the function body, then &lt;/psp:method&gt;.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.PSPParser.PSPParser.checkScript">
+<code class="sig-name descname">checkScript</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">handler</span></em>, <em class="sig-param"><span class="n">reader</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.PSPParser.PSPParser.checkScript" title="Permalink to this definition">¶</a></dt>
+<dd><p>The main thing we’re after. Check for embedded scripts.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.PSPParser.PSPParser.checkScriptClass">
+<code class="sig-name descname">checkScriptClass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">handler</span></em>, <em class="sig-param"><span class="n">reader</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.PSPParser.PSPParser.checkScriptClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check for class level code.</p>
+<p>Check for Python code that should go in the class definition:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">psp</span><span class="p">:</span><span class="n">class</span><span class="o">&gt;</span>
+    <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dosomething</span><span class="p">()</span>
+<span class="o">&lt;/</span><span class="n">psp</span><span class="p">:</span><span class="n">class</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.PSPParser.PSPParser.checkScriptFile">
+<code class="sig-name descname">checkScriptFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">handler</span></em>, <em class="sig-param"><span class="n">reader</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.PSPParser.PSPParser.checkScriptFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check for file level code.</p>
+<p>Check for Python code that must go to the top of the generated module:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">psp</span><span class="p">:</span><span class="n">file</span><span class="o">&gt;</span>
+    <span class="kn">import</span> <span class="nn">xyz</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;hi Mome!&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">foo</span><span class="p">():</span> <span class="k">return</span> <span class="s1">&#39;foo&#39;</span>
+<span class="o">&lt;/</span><span class="n">psp</span><span class="p">:</span><span class="n">file</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="PSP.PSPParser.PSPParser.checklist">
+<code class="sig-name descname">checklist</code><em class="property"> = [&lt;function PSPParser.commentCheck&gt;, &lt;function PSPParser.checkExpression&gt;, &lt;function PSPParser.checkDirective&gt;, &lt;function PSPParser.checkEndBlock&gt;, &lt;function PSPParser.checkScript&gt;, &lt;function PSPParser.checkScriptFile&gt;, &lt;function PSPParser.checkScriptClass&gt;, &lt;function PSPParser.checkMethod&gt;, &lt;function PSPParser.checkInclude&gt;, &lt;function PSPParser.checkInsert&gt;]</em><a class="headerlink" href="#PSP.PSPParser.PSPParser.checklist" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PSP.PSPParser.PSPParser.commentCheck">
+<code class="sig-name descname">commentCheck</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">_handler</span></em>, <em class="sig-param"><span class="n">reader</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.PSPParser.PSPParser.commentCheck" title="Permalink to this definition">¶</a></dt>
+<dd><p>Comments just get eaten.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.PSPParser.PSPParser.flushCharData">
+<code class="sig-name descname">flushCharData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">start</span></em>, <em class="sig-param"><span class="n">stop</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.PSPParser.PSPParser.flushCharData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dump everything to the char data handler.</p>
+<p>Dump all the HTML that we’ve accumulated over to the character data
+handler in the event handler object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.PSPParser.PSPParser.parse">
+<code class="sig-name descname">parse</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">until</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.PSPParser.PSPParser.parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse the PSP file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PSP.PSPParser.PSPParser.setEventHandler">
+<code class="sig-name descname">setEventHandler</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">handler</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.PSPParser.PSPParser.setEventHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the handler this parser will use when it finds PSP code.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="PSP.PSPParser.checker">
+<code class="sig-prename descclassname">PSP.PSPParser.</code><code class="sig-name descname">checker</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">method</span></em><span class="sig-paren">)</span><a class="headerlink" href="#PSP.PSPParser.checker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator for adding a method to the checklist.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Webware for Python 3</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changes.html">List of Changes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migrate.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../copyright.html">Copyright and License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Beginner Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appdev.html">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../config.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deploy.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">Plug-ins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../style.html">Style Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../psp.html">PSP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../userkit.html">UserKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskkit.html">TaskKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../webutils.html">WebUtils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../miscutils.html">MiscUtils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../core/index.html">Core Classes</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">PSP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../userkit/index.html">UserKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../taskkit/index.html">TaskKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../webutils/index.html">WebUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscutils/index.html">MiscUtils</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">API Reference</a><ul>
+  <li><a href="index.html">PSP</a><ul>
+      <li>Previous: <a href="psppage.html" title="previous chapter">PSPPage</a></li>
+      <li>Next: <a href="pspservletfactory.html" title="next chapter">PSPServletFactory</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;1999-2021, Christoph Zwerschke et al.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/ref/psp/pspparser.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

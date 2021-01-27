@@ -1,0 +1,311 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FieldStorage &#8212; Webware for Python 3 3.0.2 documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="Funcs" href="funcs.html" />
+    <link rel="prev" title="ExpansiveHTMLForException" href="expansivehtmlforexception.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-WebUtils.FieldStorage">
+<span id="fieldstorage"></span><h1>FieldStorage<a class="headerlink" href="#module-WebUtils.FieldStorage" title="Permalink to this headline">¶</a></h1>
+<p>FieldStorage.py</p>
+<p>This module defines a subclass of the standard Python cgi.FieldStorage class
+with an extra method that will allow a FieldStorage to parse a query string
+even in a POST request.</p>
+<dl class="py class">
+<dt id="WebUtils.FieldStorage.FieldStorage">
+<em class="property">class </em><code class="sig-prename descclassname">WebUtils.FieldStorage.</code><code class="sig-name descname">FieldStorage</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fp</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">headers</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">outerboundary</span><span class="o">=</span><span class="default_value">b''</span></em>, <em class="sig-param"><span class="n">environ</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">keep_blank_values</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">strict_parsing</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">limit</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">encoding</span><span class="o">=</span><span class="default_value">'utf-8'</span></em>, <em class="sig-param"><span class="n">errors</span><span class="o">=</span><span class="default_value">'replace'</span></em>, <em class="sig-param"><span class="n">max_num_fields</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.FieldStorage.FieldStorage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">cgi.FieldStorage</span></code></p>
+<p>Modified FieldStorage class for POST requests with query strings.</p>
+<p>Parameters in the query string which have not been sent via POST are
+appended to the field list. This is different from the behavior of
+Python versions before 2.6 which completely ignored the query string in
+POST request, but it’s also different from the behavior of the later Python
+versions which append values from the query string to values sent via POST
+for parameters with the same name. With other words, our FieldStorage class
+overrides the query string parameters with the parameters sent via POST.</p>
+<p>As recommended by W3C in section B.2.2 of the HTML 4.01 specification,
+we also support use of ‘;’ in place of ‘&amp;’ as separator in query strings.</p>
+<dl class="py attribute">
+<dt id="WebUtils.FieldStorage.FieldStorage.FieldStorageClass">
+<code class="sig-name descname">FieldStorageClass</code><em class="property"> = None</em><a class="headerlink" href="#WebUtils.FieldStorage.FieldStorage.FieldStorageClass" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.FieldStorage.FieldStorage.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fp</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">headers</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">outerboundary</span><span class="o">=</span><span class="default_value">b''</span></em>, <em class="sig-param"><span class="n">environ</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">keep_blank_values</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">strict_parsing</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">limit</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">encoding</span><span class="o">=</span><span class="default_value">'utf-8'</span></em>, <em class="sig-param"><span class="n">errors</span><span class="o">=</span><span class="default_value">'replace'</span></em>, <em class="sig-param"><span class="n">max_num_fields</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.FieldStorage.FieldStorage.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor.  Read multipart/* until last part.</p>
+<p>Arguments, all optional:</p>
+<dl class="simple">
+<dt>fp<span class="classifier">file pointer; default: sys.stdin.buffer</span></dt><dd><p>(not used when the request method is GET)
+Can be :
+1. a TextIOWrapper object
+2. an object whose read() and readline() methods return bytes</p>
+</dd>
+<dt>headers<span class="classifier">header dictionary-like object; default:</span></dt><dd><p>taken from environ as per CGI spec</p>
+</dd>
+<dt>outerboundary<span class="classifier">terminating multipart boundary</span></dt><dd><p>(for internal use only)</p>
+</dd>
+</dl>
+<p>environ         : environment dictionary; default: os.environ</p>
+<dl class="simple">
+<dt>keep_blank_values: flag indicating whether blank values in</dt><dd><p>percent-encoded forms should be treated as blank strings.
+A true value indicates that blanks should be retained as
+blank strings.  The default false value indicates that
+blank values are to be ignored and treated as if they were
+not included.</p>
+</dd>
+<dt>strict_parsing: flag indicating what to do with parsing errors.</dt><dd><p>If false (the default), errors are silently ignored.
+If true, errors raise a ValueError exception.</p>
+</dd>
+<dt>limit<span class="classifier">used internally to read parts of multipart/form-data forms,</span></dt><dd><p>to exit from the reading loop when reached. It is the difference
+between the form content-length and the number of bytes already
+read</p>
+</dd>
+<dt>encoding, errors<span class="classifier">the encoding and error handler used to decode the</span></dt><dd><p>binary stream to strings. Must be the same as the charset defined
+for the page sending the form (content-type : meta http-equiv or
+header)</p>
+</dd>
+<dt>max_num_fields: int. If set, then __init__ throws a ValueError</dt><dd><p>if there are more than n fields read by parse_qsl().</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.FieldStorage.FieldStorage.add_qs">
+<code class="sig-name descname">add_qs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">qs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.FieldStorage.FieldStorage.add_qs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add all non-existing parameters from the given query string.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="WebUtils.FieldStorage.FieldStorage.bufsize">
+<code class="sig-name descname">bufsize</code><em class="property"> = 8192</em><a class="headerlink" href="#WebUtils.FieldStorage.FieldStorage.bufsize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.FieldStorage.FieldStorage.getfirst">
+<code class="sig-name descname">getfirst</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span></em>, <em class="sig-param"><span class="n">default</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.FieldStorage.FieldStorage.getfirst" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the first value received.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.FieldStorage.FieldStorage.getlist">
+<code class="sig-name descname">getlist</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.FieldStorage.FieldStorage.getlist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return list of received values.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.FieldStorage.FieldStorage.getvalue">
+<code class="sig-name descname">getvalue</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span></em>, <em class="sig-param"><span class="n">default</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.FieldStorage.FieldStorage.getvalue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary style get() method, including ‘value’ lookup.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.FieldStorage.FieldStorage.keys">
+<code class="sig-name descname">keys</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.FieldStorage.FieldStorage.keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary style keys() method.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.FieldStorage.FieldStorage.make_file">
+<code class="sig-name descname">make_file</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.FieldStorage.FieldStorage.make_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overridable: return a readable &amp; writable file.</p>
+<p>The file will be used as follows:
+- data is written to it
+- seek(0)
+- data is read from it</p>
+<p>The file is opened in binary mode for files, in text mode
+for other fields</p>
+<p>This version opens a temporary file for reading and writing,
+and immediately deletes (unlinks) it.  The trick (on Unix!) is
+that the file can still be used, but it can’t be opened by
+another process, and it will automatically be deleted when it
+is closed or when the current process terminates.</p>
+<p>If you want a more permanent file, you derive a class which
+overrides this method.  If you want a visible temporary file
+that is nevertheless automatically deleted when the script
+terminates, try defining a __del__ method in a derived class
+which unlinks the temporary files you have created.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.FieldStorage.FieldStorage.read_binary">
+<code class="sig-name descname">read_binary</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.FieldStorage.FieldStorage.read_binary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal: read binary data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.FieldStorage.FieldStorage.read_lines">
+<code class="sig-name descname">read_lines</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.FieldStorage.FieldStorage.read_lines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal: read lines until EOF or outerboundary.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.FieldStorage.FieldStorage.read_lines_to_eof">
+<code class="sig-name descname">read_lines_to_eof</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.FieldStorage.FieldStorage.read_lines_to_eof" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal: read lines until EOF.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.FieldStorage.FieldStorage.read_lines_to_outerboundary">
+<code class="sig-name descname">read_lines_to_outerboundary</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.FieldStorage.FieldStorage.read_lines_to_outerboundary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal: read lines until outerboundary.
+Data is read as bytes: boundaries and line ends must be converted
+to bytes for comparisons.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.FieldStorage.FieldStorage.read_multi">
+<code class="sig-name descname">read_multi</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">environ</span></em>, <em class="sig-param"><span class="n">keep_blank_values</span></em>, <em class="sig-param"><span class="n">strict_parsing</span></em><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.FieldStorage.FieldStorage.read_multi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal: read a part that is itself multipart.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.FieldStorage.FieldStorage.read_single">
+<code class="sig-name descname">read_single</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.FieldStorage.FieldStorage.read_single" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal: read an atomic part.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.FieldStorage.FieldStorage.read_urlencoded">
+<code class="sig-name descname">read_urlencoded</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.FieldStorage.FieldStorage.read_urlencoded" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal: read data in query string format.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="WebUtils.FieldStorage.FieldStorage.skip_lines">
+<code class="sig-name descname">skip_lines</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WebUtils.FieldStorage.FieldStorage.skip_lines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal: skip lines until outer boundary if defined.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Webware for Python 3</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changes.html">List of Changes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migrate.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../copyright.html">Copyright and License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Beginner Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appdev.html">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../config.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deploy.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">Plug-ins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../style.html">Style Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../psp.html">PSP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../userkit.html">UserKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskkit.html">TaskKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../webutils.html">WebUtils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../miscutils.html">MiscUtils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../core/index.html">Core Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../psp/index.html">PSP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../userkit/index.html">UserKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../taskkit/index.html">TaskKit</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">WebUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscutils/index.html">MiscUtils</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">API Reference</a><ul>
+  <li><a href="index.html">WebUtils</a><ul>
+      <li>Previous: <a href="expansivehtmlforexception.html" title="previous chapter">ExpansiveHTMLForException</a></li>
+      <li>Next: <a href="funcs.html" title="next chapter">Funcs</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;1999-2021, Christoph Zwerschke et al.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/ref/webutils/fieldstorage.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

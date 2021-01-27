@@ -1,0 +1,329 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>XMLRPCServlet &#8212; Webware for Python 3 3.0.2 documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="PSP" href="../psp/index.html" />
+    <link rel="prev" title="WSGIStreamOut" href="wsgistreamout.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-XMLRPCServlet">
+<span id="xmlrpcservlet"></span><h1>XMLRPCServlet<a class="headerlink" href="#module-XMLRPCServlet" title="Permalink to this headline">¶</a></h1>
+<p>XML-RPC servlet base class</p>
+<p>Written by Geoffrey Talvola</p>
+<p>See Examples/XMLRPCExample.py for sample usage.</p>
+<dl class="py class">
+<dt id="XMLRPCServlet.XMLRPCServlet">
+<em class="property">class </em><code class="sig-prename descclassname">XMLRPCServlet.</code><code class="sig-name descname">XMLRPCServlet</code><a class="headerlink" href="#XMLRPCServlet.XMLRPCServlet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="rpcservlet.html#RPCServlet.RPCServlet" title="RPCServlet.RPCServlet"><code class="xref py py-class docutils literal notranslate"><span class="pre">RPCServlet.RPCServlet</span></code></a></p>
+<p>XMLRPCServlet is a base class for XML-RPC servlets.</p>
+<p>See Examples/XMLRPCExample.py for sample usage.</p>
+<p>For more Pythonic convenience at the cost of language independence,
+see PickleRPCServlet.</p>
+<dl class="py method">
+<dt id="XMLRPCServlet.XMLRPCServlet.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#XMLRPCServlet.XMLRPCServlet.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Subclasses must invoke super.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="XMLRPCServlet.XMLRPCServlet.allow_none">
+<code class="sig-name descname">allow_none</code><em class="property"> = True</em><a class="headerlink" href="#XMLRPCServlet.XMLRPCServlet.allow_none" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="XMLRPCServlet.XMLRPCServlet.awake">
+<code class="sig-name descname">awake</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">transaction</span></em><span class="sig-paren">)</span><a class="headerlink" href="#XMLRPCServlet.XMLRPCServlet.awake" title="Permalink to this definition">¶</a></dt>
+<dd><p>Begin transaction.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="XMLRPCServlet.XMLRPCServlet.call">
+<code class="sig-name descname">call</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">methodName</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">keywords</span></em><span class="sig-paren">)</span><a class="headerlink" href="#XMLRPCServlet.XMLRPCServlet.call" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call custom method.</p>
+<p>Subclasses may override this class for custom handling of methods.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="XMLRPCServlet.XMLRPCServlet.canBeReused">
+<em class="property">static </em><code class="sig-name descname">canBeReused</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#XMLRPCServlet.XMLRPCServlet.canBeReused" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether a single servlet instance can be reused.</p>
+<p>The default is True, but subclasses con override to return False.
+Keep in mind that performance may seriously be degraded if instances
+can’t be reused. Also, there’s no known good reasons not to reuse
+an instance. Remember the awake() and sleep() methods are invoked
+for every transaction. But just in case, your servlet can refuse
+to be reused.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="XMLRPCServlet.XMLRPCServlet.canBeThreaded">
+<em class="property">static </em><code class="sig-name descname">canBeThreaded</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#XMLRPCServlet.XMLRPCServlet.canBeThreaded" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return whether the servlet can be multithreaded.</p>
+<p>This value should not change during the lifetime of the object.
+The default implementation returns False.
+Note: This is not currently used.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="XMLRPCServlet.XMLRPCServlet.close">
+<code class="sig-name descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#XMLRPCServlet.XMLRPCServlet.close" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="XMLRPCServlet.XMLRPCServlet.exposedMethods">
+<em class="property">static </em><code class="sig-name descname">exposedMethods</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#XMLRPCServlet.XMLRPCServlet.exposedMethods" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get exposed methods.</p>
+<p>Subclasses should return a list of methods that will be exposed
+through XML-RPC.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="XMLRPCServlet.XMLRPCServlet.handleException">
+<em class="property">static </em><code class="sig-name descname">handleException</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">transaction</span></em><span class="sig-paren">)</span><a class="headerlink" href="#XMLRPCServlet.XMLRPCServlet.handleException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle exception.</p>
+<p>If ReportRPCExceptionsInWebware is set to True, then flush the response
+(because we don’t want the standard HTML traceback to be appended to
+the response) and then handle the exception in the standard Webware
+way. This means logging it to the console, storing it in the error log,
+sending error email, etc. depending on the settings.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="XMLRPCServlet.XMLRPCServlet.lastModified">
+<em class="property">static </em><code class="sig-name descname">lastModified</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">_trans</span></em><span class="sig-paren">)</span><a class="headerlink" href="#XMLRPCServlet.XMLRPCServlet.lastModified" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get time of last modification.</p>
+<p>Return this object’s Last-Modified time (as a float),
+or None (meaning don’t know or not applicable).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="XMLRPCServlet.XMLRPCServlet.log">
+<code class="sig-name descname">log</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">message</span></em><span class="sig-paren">)</span><a class="headerlink" href="#XMLRPCServlet.XMLRPCServlet.log" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log a message.</p>
+<p>This can be invoked to print messages concerning the servlet.
+This is often used by self to relay important information back
+to developers.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="XMLRPCServlet.XMLRPCServlet.name">
+<code class="sig-name descname">name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#XMLRPCServlet.XMLRPCServlet.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the name which is simple the name of the class.</p>
+<p>Subclasses should <em>not</em> override this method.
+It is used for logging and debugging.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="XMLRPCServlet.XMLRPCServlet.notImplemented">
+<em class="property">static </em><code class="sig-name descname">notImplemented</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">trans</span></em><span class="sig-paren">)</span><a class="headerlink" href="#XMLRPCServlet.XMLRPCServlet.notImplemented" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="XMLRPCServlet.XMLRPCServlet.open">
+<code class="sig-name descname">open</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#XMLRPCServlet.XMLRPCServlet.open" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="XMLRPCServlet.XMLRPCServlet.respond">
+<code class="sig-name descname">respond</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">transaction</span></em><span class="sig-paren">)</span><a class="headerlink" href="#XMLRPCServlet.XMLRPCServlet.respond" title="Permalink to this definition">¶</a></dt>
+<dd><p>Respond to a request.</p>
+<p>Invokes the appropriate respondToSomething() method depending on the
+type of request (e.g., GET, POST, PUT, …).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="XMLRPCServlet.XMLRPCServlet.respondToHead">
+<code class="sig-name descname">respondToHead</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">trans</span></em><span class="sig-paren">)</span><a class="headerlink" href="#XMLRPCServlet.XMLRPCServlet.respondToHead" title="Permalink to this definition">¶</a></dt>
+<dd><p>Respond to a HEAD request.</p>
+<p>A correct but inefficient implementation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="XMLRPCServlet.XMLRPCServlet.respondToPost">
+<code class="sig-name descname">respondToPost</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">transaction</span></em><span class="sig-paren">)</span><a class="headerlink" href="#XMLRPCServlet.XMLRPCServlet.respondToPost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Respond to a Post request.</p>
+<p>This is similar to the xmlrpcserver.py example from the xmlrpc
+library distribution, only it’s been adapted to work within a
+Webware servlet.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="XMLRPCServlet.XMLRPCServlet.resultForException">
+<code class="sig-name descname">resultForException</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">e</span></em>, <em class="sig-param"><span class="n">trans</span></em><span class="sig-paren">)</span><a class="headerlink" href="#XMLRPCServlet.XMLRPCServlet.resultForException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get text for exception.</p>
+<p>Given an unhandled exception, returns the string that should be
+sent back in the RPC response as controlled by the
+RPCExceptionReturn setting.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="XMLRPCServlet.XMLRPCServlet.runMethodForTransaction">
+<code class="sig-name descname">runMethodForTransaction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">transaction</span></em>, <em class="sig-param"><span class="n">method</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kw</span></em><span class="sig-paren">)</span><a class="headerlink" href="#XMLRPCServlet.XMLRPCServlet.runMethodForTransaction" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="XMLRPCServlet.XMLRPCServlet.runTransaction">
+<em class="property">static </em><code class="sig-name descname">runTransaction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">transaction</span></em><span class="sig-paren">)</span><a class="headerlink" href="#XMLRPCServlet.XMLRPCServlet.runTransaction" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="XMLRPCServlet.XMLRPCServlet.sendOK">
+<em class="property">static </em><code class="sig-name descname">sendOK</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">contentType</span></em>, <em class="sig-param"><span class="n">contents</span></em>, <em class="sig-param"><span class="n">trans</span></em>, <em class="sig-param"><span class="n">contentEncoding</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#XMLRPCServlet.XMLRPCServlet.sendOK" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send a 200 OK response with the given contents.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="XMLRPCServlet.XMLRPCServlet.serverSidePath">
+<code class="sig-name descname">serverSidePath</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#XMLRPCServlet.XMLRPCServlet.serverSidePath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the filesystem path of the page on the server.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="XMLRPCServlet.XMLRPCServlet.setFactory">
+<code class="sig-name descname">setFactory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">factory</span></em><span class="sig-paren">)</span><a class="headerlink" href="#XMLRPCServlet.XMLRPCServlet.setFactory" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="XMLRPCServlet.XMLRPCServlet.sleep">
+<code class="sig-name descname">sleep</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">transaction</span></em><span class="sig-paren">)</span><a class="headerlink" href="#XMLRPCServlet.XMLRPCServlet.sleep" title="Permalink to this definition">¶</a></dt>
+<dd><p>End transaction.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="XMLRPCServlet.XMLRPCServlet.transaction">
+<code class="sig-name descname">transaction</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#XMLRPCServlet.XMLRPCServlet.transaction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the corresponding transaction.</p>
+<p>Most uses of RPC will not need this.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Webware for Python 3</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changes.html">List of Changes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migrate.html">Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../copyright.html">Copyright and License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Beginner Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appdev.html">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../config.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deploy.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins.html">Plug-ins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../style.html">Style Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../psp.html">PSP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../userkit.html">UserKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskkit.html">TaskKit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../webutils.html">WebUtils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../miscutils.html">MiscUtils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Core Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../psp/index.html">PSP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../userkit/index.html">UserKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../taskkit/index.html">TaskKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../webutils/index.html">WebUtils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../miscutils/index.html">MiscUtils</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">API Reference</a><ul>
+  <li><a href="index.html">Core Classes</a><ul>
+      <li>Previous: <a href="wsgistreamout.html" title="previous chapter">WSGIStreamOut</a></li>
+      <li>Next: <a href="../psp/index.html" title="next chapter">PSP</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;1999-2021, Christoph Zwerschke et al.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/ref/core/xmlrpcservlet.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
